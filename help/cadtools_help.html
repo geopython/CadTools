@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+ <head>
+  <title>CadTools - Help</title>
+
+  <link href=' http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+  <link href=' http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+
+  <style type="text/css">
+   #container { 
+    background-color: #FFFFFF;
+    border: 0px solid #000000; 
+    margin: 15px auto 0; 
+    padding: 7px 0;
+    text-align: left; 
+    vertical-align: middle; 
+    width: 700px; 
+   }
+
+  </style>
+ </head>
+
+ <body style="font-family:'Droid Sans', Arial, sans; font-size:12pt; background-color:#FFFFFF">
+
+  <div id="container">
+   <div style="background-color:white; color:#422808; padding:0px; margin:0px 0px 20px 0px;">
+
+    <div style="font-weight:bold; margin:0px 0px 5px 0px;">
+    Intersection (of non-intersecting linesegments)</div>
+    <div style="margin-left:0px; margin-bottom:1em; font-size:10pt">
+
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/select2lines.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">You first
+      have to select two line segments. The tool will always lets
+      you select two segments. If you select a third one, it
+      deletes the first segment selection. Please bear in mind that
+      you have appropriate snapping settings values. You can select
+      segments either from lines or polygons.</div>
+     </div>
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/pointandline.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">You can
+      now create an intersection point that will be drawn in
+      a memory layer. It will create also a line that joins the two
+      points furthest away with the intersection point.</div>
+     </div>
+    </div>
+   </div>
+   <div style="background-color:white; color:#422808; padding:0px; margin:0px 0px 20px 0px;">
+
+    <div style="font-weight:bold; margin:0px 0px 5px 0px;">Arc
+    Intersection</div>
+    <div style="margin-left:0px; margin-bottom:1em; font-size:10pt">
+
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/select2points.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">This tool
+      lets you calculate an arc intersection from two distances to
+      two points. You have to select two points. If you select a
+      third one, the first selection will be canceled. Please bear
+      in mind that you have appropriate snapping settings values
+      and the "on the fly" crs transformation should not be
+      enabled.</div>
+     </div>
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/arcintersection.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">When you
+      have selected two points you can calculate the arc
+      intersection by entering the distance (in meters) to the two
+      selected points. The intersection point(s) will be drawn in a
+      memory layer.</div>
+     </div>
+    </div>
+   </div>
+   <div style="background-color:white; color:#422808; padding:0px; margin:0px 0px 20px 0px;">
+
+    <div style="font-weight:bold; margin:0px 0px 5px 0px;">
+    Orthogonal Line</div>
+    <div style="margin-left:0px; margin-bottom:1em; font-size:10pt">
+
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/selectpointandline.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">This one
+      is for creating a orthogonal line (and the intersection
+      point) from a point to a linesegment. You first have to
+      select a vertex (which has to be in the current layer) and
+      then the segment from a background layer. The selector will
+      toggle between vertex and segment selections. Please bear in
+      mind that you have appropriate snapping settings</div>
+     </div>
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/ortholine.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">When you
+      have selected a vertex and a segment you can create the
+      orthogonal line and the intersection point. These two objects
+      will be drawn in a memory layer.</div>
+     </div>
+    </div>
+   </div>
+   <div style="background-color:white; color:#422808; padding:0px; margin:0px 0px 20px 0px;">
+
+    <div style="font-weight:bold; margin:0px 0px 5px 0px;">
+    Rectangular Points</div>
+    <div style="margin-left:0px; margin-bottom:1em; font-size:10pt">
+
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/selectsinglesegment.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">This
+      function lets draw points from orthogonal measurements to a
+      base line. You first have to select the line segment.</div>
+     </div>
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/rectangularpoints.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">If you
+      selected the base line you can simply enter the abscissa (x)
+      and the ordinate (y). The origin is always the left point of
+      base line. But you can invert the origin by checking the
+      checkbox.</div>
+     </div>
+    </div>
+   </div>
+   <div style="background-color:white; color:#422808; padding:0px; margin:0px 0px 20px 0px;">
+
+    <div style="font-weight:bold; margin:0px 0px 5px 0px;">
+    Orthogonal Traverse</div>
+    <div style="margin-left:0px; margin-bottom:1em; font-size:10pt">
+
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/select2points.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">With this
+      function you can draw/calculate an orthogonal traverse
+      between two points which you have to select first.</div>
+     </div>
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/orthogonaltraverse.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">After
+      selecting the two points you can calculate the orthogonal
+      traverse by entering the distances you measured in one line,
+      e.g. "3.5 -2.46 -12.33 4.5". This describes an orthogonal
+      traverse with four distances. If you want to turn left you
+      have to use negative values.</div>
+     </div>
+    </div>
+   </div>
+   <div style="background-color:white; color:#422808; padding:0px; margin:0px 0px 20px 0px;">
+
+   
+    <div style="font-weight:bold; margin:0px 0px 5px 0px;">
+    Show Azimuth</div>
+    <div style="margin-left:0px; margin-bottom:1em; font-size:10pt">
+
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/select2points.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">With this
+      function you can calculate the azimuth
+      between two points which you have to select first.</div>
+     </div>
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/showazimuth.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">After
+      selecting the two points you can calculate the azimuth just by
+      pushing the button.</div>
+     </div>
+    </div>
+   </div>
+   <div style="background-color:white; color:#422808; padding:0px; margin:0px 0px 20px 0px;">   
+   
+   
+    <div style="font-weight:bold; margin:0px 0px 5px 0px;">
+    Rotate Feature</div>
+    <div style="margin-left:0px; margin-bottom:1em; font-size:10pt">
+
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/selectvertexandfeature.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">This function is
+      for rotating features. You first have to select the feature you want to rotate 
+      and a vertex which will be the centre of rotation. The vertex does not have
+      to be on the current layer.</div>
+     </div>
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/rotatefeature.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">After
+      selecting the feature and the vertex you can enter the angle of
+      rotation (in degrees).</div>
+     </div>
+    </div>
+   </div>
+   <div style="background-color:white; color:#422808; padding:0px; margin:0px 0px 20px 0px;">   
+   
+   
+    <div style="font-weight:bold; margin:0px 0px 5px 0px;">
+    Orthogonal Digitizing</div>
+    <div style="margin-left:0px; margin-bottom:1em; font-size:10pt">
+
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/ortho.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">This function is only available if there is a polygon or a linestring layer in editing mode otherwise
+       the button is greyed out. You have to press the ctrl key to draw lines or polygons with square angles.
+       To close a polygon you have 2 alternatives:
+       <ol>
+        <li>You can release the ctrl key before closing the polygon with a right mouse click. You have
+         to draw by eye when you want a square angle.</li>
+        <li>When you have the ctrl key pressed when closing the polygon, the first point of the polygon
+         will be moved till the last angle is square.</li>				
+        </ol>
+        There will no attribute window pop up.
+</div>
+     </div>
+    </div>
+   </div>
+   <div style="background-color:white; color:#422808; padding:0px; margin:0px 0px 20px 0px;">
+
+    <div style="font-weight:bold; margin:0px 0px 5px 0px;">Cad
+    Console</div>
+    <div style="margin-left:0px; margin-bottom:1em; font-size:10pt">
+
+     <div id="function">
+      <div id="head">
+       <img style="border: 1px solid black;"
+       src="images/cadconsole.png" />
+      </div>
+      <div style="margin:0px 0px 5px 0px; color:#000000;">The cad
+      console supports some commands: 
+      <ol>
+       <li> <span style="font-family: 'Droid Sans Mono', arial, monospace;">ortho <i>on/off</i></span>: Toggles ortho mode on and off so 
+        you don't need to push the ctrl-button all the time.
+       </li>
+       <li> <span style="font-family: 'Droid Sans Mono', arial, monospace;">ortho <i>abscissa ordinate</i></span>:  Adds an orthogonal vertex 
+        point with <span style="font-family: 'Droid Sans Mono', arial, monospace;">abscissa</span> = abscissa and <span style="font-family: 'Droid Sans Mono', arial, monospace;">ordinate</span> = ordinate.
+       </li>
+       <li> <span style="font-family: 'Droid Sans Mono', arial, monospace;">polar <i>angle distance</i></span>:  Adds a polar vertex point with <span style="font-family: 'Droid Sans Mono', arial, monospace;">angle</span> 
+        = angle and <span style="font-family: 'Droid Sans Mono', arial, monospace;">distance</span> = distance. 
+        The angle is always relative to the last segment.
+       </li>
+       <li> <span style="font-family: 'Droid Sans Mono', arial, monospace;">length <i>length/off</i></span>:  Sets the digitizer to a restricted digitizing length for the following segments.
+       </li>       
+       <li> <span style="font-family: 'Droid Sans Mono', arial, monospace;">close line</span>:  Close the digitized line.
+       <li> <span style="font-family: 'Droid Sans Mono', arial, monospace;">close poly</span>:  Close the digitized polygon.
+       </li>      
+        <li> <span style="font-family: 'Droid Sans Mono', arial, monospace;">exit</span>:  Exits the cad console.
+       </li>      
+      </ol>
+      These commands only work if you use the orthogonal digitizer tool. For adding vertex points (No. 2, 3, 5 and 6) you need at least one digitized segment.
+
+
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>

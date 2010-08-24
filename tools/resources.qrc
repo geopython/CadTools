@@ -1,0 +1,72 @@
+<RCC>
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/select2lines.png</file>
+    </qresource>
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/point.png</file>
+    </qresource>
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/line.png</file>
+    </qresource>
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/pointandline.png</file>
+    </qresource>
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/select2vertex.png</file>
+    </qresource>    
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/arcintersectionpoint.png</file>
+    </qresource>        
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/ortho.png</file>
+    </qresource>   
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/orthopointandline.png</file>
+    </qresource>    
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/select1vertex.png</file>
+    </qresource>     
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/select1line.png</file>
+    </qresource>  
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/selectvertexandsegment.png</file>
+    </qresource>     
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/selectthreevertex.png</file>
+    </qresource>
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/select1line_v2.png</file>
+    </qresource>   
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/orthopoint.png</file>
+    </qresource>  
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/horizontalline.png</file>
+    </qresource>    
+    <qresource prefix="/plugins/cadtools" >
+        <file>../icons/orthogonaltraverse.png</file>
+    </qresource>   
+     <qresource prefix="/plugins/cadtools" >
+        <file>../icons/orthogonaltraverse2.png</file>
+    </qresource>   
+     <qresource prefix="/plugins/cadtools" >
+        <file>../icons/cadconsole2.png</file>
+    </qresource>       
+     <qresource prefix="/plugins/cadtools" >
+        <file>../icons/cadconsole2.png</file>
+    </qresource>
+
+     <qresource prefix="/plugins/cadtools" >
+        <file>../icons/showazimuth.png</file>
+    </qresource>
+     <qresource prefix="/plugins/cadtools" >
+        <file>../icons/selectvertexandfeature.png</file>
+    </qresource>
+     <qresource prefix="/plugins/cadtools" >
+        <file>../icons/rotatefeature.png</file>
+    </qresource>
+
+
+
+</RCC>
