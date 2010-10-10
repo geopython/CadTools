@@ -66,9 +66,10 @@ class VertexFinderTool(QgsMapTool):
       #we snap to the current layer (we don't have exclude points and use the tolerances from the qgis properties)
       (retval,result) = snapper.snapToCurrentLayer (startingPoint,QgsSnapper.SnapToVertex)
                        
-      #so if we have found a vertex
+      #so if we don't have found a vertex we try to find one on the backgroundlayer
       if result == []:
           (retval,result) = snapper.snapToBackgroundLayers(startingPoint)
+          
       if result <> []:
 
 

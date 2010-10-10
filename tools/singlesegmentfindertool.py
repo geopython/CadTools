@@ -57,8 +57,12 @@ class SingleSegmentFinderTool(QgsMapTool):
       
       #we snap to the current layer (we don't have exclude points and use the tolerances from the qgis properties)
       (retval,result) = snapper.snapToCurrentLayer (startingPoint,QgsSnapper.SnapToSegment)
+      
+      #if we don't have found a linesegment we try to find one on the backgroundlayer
+      if result == []:
+          (retval,result) = snapper.snapToBackgroundLayers(startingPoint)
                        
-      #so if we have found a vertex
+      #if we have found a linesegment
       if result <> []:
                 
         # we like to mark the segment that is choosen, so we need a rubberband
@@ -71,11 +75,10 @@ class SingleSegmentFinderTool(QgsMapTool):
         self.rb1.addPoint(result[0].afterVertex)
         self.rb1.show()
 
-        
-        #QMessageBox.information(None,  "Cancel",  str(self.rb1.getPoint(0, 0)) + " - " + str(self.rb1.getPoint(0, 2)) + " - " + str(self.rb2.getPoint(0, 0)) + " - " + str(self.rb2.getPoint(0, 2)) )
+#        QMessageBox.information(None,  "Cancel",  str(self.rb1.getPoint(0, 0)) + " - " + str(self.rb1.getPoint(0, 2)) )
         
         #tell the world about the segment
-        self.emit(SIGNAL("segmentFound(PyQt_PyObject)"), [self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 2)])
+        self.emit(SIGNAL("segmentFound(PyQt_PyObject)"), [self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 2),  self.rb1])
          
       else:
         #warn about missing snapping tolerance if appropriate
@@ -101,9 +104,7 @@ class SingleSegmentFinderTool(QgsMapTool):
     self.canvas.setCursor(self.cursor)
   
   def deactivate(self):
-    #QMessageBox.information(None,  "Cancel", "finder deakt")
     self.rb1.reset()
-    pass
 
   def isZoomTool(self):
     return False

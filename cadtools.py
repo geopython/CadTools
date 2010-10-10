@@ -18,6 +18,7 @@ from orthoelementsonsegmenttool import OrthoElementsOnSegmentTool
 from rectangularpointstool import RectangularPointsTool
 from showazimuthtool import ShowAzimuthTool
 from rotateobjecttool import RotateObjectTool
+from parallellinetool import ParallelLineTool
 from orthogonaltraversetool import OrthogonalTraverseTool
 from cadtoolsaboutgui import CadToolsAboutGui
 
@@ -68,6 +69,7 @@ class CadTools:
         self.orthogonaltraverse = OrthogonalTraverseTool(self.iface, self.toolBar)        
         self.showazimuth = ShowAzimuthTool(self.iface,  self.toolBar)         
         self.rotateobject = RotateObjectTool(self.iface,  self.toolBar)
+        self.parallelline = ParallelLineTool(self.iface,  self.toolBar)
         self.orthogonaldigitizer = OrthogonalDigitizerTool(self.iface,  self.toolBar, self.menu)
         
         

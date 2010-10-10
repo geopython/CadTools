@@ -71,17 +71,13 @@ class RotateObjectTool:
         pass
 
 
-    def rotateObject(self,  angle):
-        print "*** gaga ***"
-        print angle
-        
+    def rotateObject(self,  angle):        
         geom = cadutils.rotate(self.feat.geometry(), self.p1,  angle * math.pi / 180)
         if geom <> None:
             cadutils.addGeometryToCadLayer(geom)
             self.canvas.refresh()
 
         
-
     def unsetTool(self):
         self.m1 = None
         self.rb.reset()

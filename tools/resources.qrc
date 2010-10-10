@@ -56,7 +56,6 @@
      <qresource prefix="/plugins/cadtools" >
         <file>../icons/cadconsole2.png</file>
     </qresource>
-
      <qresource prefix="/plugins/cadtools" >
         <file>../icons/showazimuth.png</file>
     </qresource>
@@ -66,7 +65,9 @@
      <qresource prefix="/plugins/cadtools" >
         <file>../icons/rotatefeature.png</file>
     </qresource>
-
+     <qresource prefix="/plugins/cadtools" >
+        <file>../icons/parallel.png</file>
+    </qresource>
 
 
 </RCC>
