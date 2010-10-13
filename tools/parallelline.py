@@ -8,7 +8,9 @@ class ParallelLine:
     def calculateLine(p1,  p2, dist):
         
         if dist == 0:
-            return [p1,  p2]
+            points = [p1,  p2]
+            g = QgsGeometry.fromPolyline(points)
+            return g
     
         dn = ( (p1.x()-p2.x())**2 + (p1.y()-p2.y())**2 )**0.5
         x3 = p1.x() + dist*(p1.y()-p2.y()) / dn

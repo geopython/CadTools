@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'parallelline.ui'
 #
-# Created: Sun Oct 10 16:44:33 2010
+# Created: Wed Oct 13 21:40:13 2010
 #      by: PyQt4 UI code generator 4.7.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -21,6 +21,7 @@ class Ui_ParallelLine(object):
         self.gridLayout = QtGui.QGridLayout(ParallelLine)
         self.gridLayout.setObjectName("gridLayout")
         self.buttonBox = QtGui.QDialogButtonBox(ParallelLine)
+        self.buttonBox.setEnabled(False)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.gridLayout.addWidget(self.buttonBox, 4, 0, 1, 1)
@@ -48,6 +49,11 @@ class Ui_ParallelLine(object):
         self.radioVertex = QtGui.QRadioButton(self.groupBox)
         self.radioVertex.setObjectName("radioVertex")
         self.horizontalLayout_2.addWidget(self.radioVertex)
+        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem1)
+        self.btnSelectVertex = QtGui.QPushButton(self.groupBox)
+        self.btnSelectVertex.setObjectName("btnSelectVertex")
+        self.horizontalLayout_2.addWidget(self.btnSelectVertex)
         self.gridLayout_2.addLayout(self.horizontalLayout_2, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.groupBox, 3, 0, 1, 1)
 
@@ -61,4 +67,5 @@ class Ui_ParallelLine(object):
         self.groupBox.setTitle(QtGui.QApplication.translate("ParallelLine", "Parallel line", None, QtGui.QApplication.UnicodeUTF8))
         self.radioFixed.setText(QtGui.QApplication.translate("ParallelLine", "Fixed length", None, QtGui.QApplication.UnicodeUTF8))
         self.radioVertex.setText(QtGui.QApplication.translate("ParallelLine", "Snap to vertex", None, QtGui.QApplication.UnicodeUTF8))
+        self.btnSelectVertex.setText(QtGui.QApplication.translate("ParallelLine", "Select Vertex", None, QtGui.QApplication.UnicodeUTF8))
 
