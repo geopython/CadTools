@@ -30,9 +30,10 @@ class ParallelLineTool:
             self.rb1 = QgsRubberBand(self.canvas,  False)
             
             self.pv = None
+            self.dummy = False
             
             # Create actions 
-            self.action_selectline = QAction(QIcon(":/plugins/cadtools/icons/select1line.png"),  "Select one linesegment",  self.iface.mainWindow())
+            self.action_selectline = QAction(QIcon(":/plugins/cadtools/icons/select1line_v2.png"),  "Select one linesegment",  self.iface.mainWindow())
             self.action_parallelline = QAction(QIcon(":/plugins/cadtools/icons/parallel.png"),  "Create parallel line",  self.iface.mainWindow())
             self.action_selectline.setCheckable(True)      
       
@@ -46,6 +47,7 @@ class ParallelLineTool:
             toolBar.addAction(self.action_parallelline)
 
         def selectLineSegment(self):
+            
             mc = self.canvas
             layer = mc.currentLayer()
 
@@ -66,11 +68,16 @@ class ParallelLineTool:
                 self.p2 = result[1]
             else:
                 self.p1 = result[1]
-                self.p2 = result[0]        
+                self.p2 = result[0]      
+              
+            self.dummy = True
 
 
         def showDialog(self):
-            if self.p1 == None or self.p2 == None:
+            if self.p1 == None or self.p2 == None or self.dummy == False:
+                self.p1 = None
+                self.p2 = None
+                self.m1 = None                   
                 QMessageBox.information(None,  "Cancel",  "No linesegment selected.")
             else:
                 flags = Qt.WindowTitleHint | Qt.WindowSystemMenuHint | Qt.WindowMaximizeButtonHint  # QgisGui.ModalDialogFlags
@@ -150,15 +157,15 @@ class ParallelLineTool:
             self.p2 = p2        
         
         def unsetTool(self):
+            print "***************** unset tool"
             mc = self.canvas
             mc.unsetMapTool(self.tool)      
             self.action_selectline.setChecked(False)       
             
             
         def deactivate(self):
-#            self.p1 = None
-#            self.p2 = None
-#            self.m1 = None
+            print "***************** deactivate"  
+            self.dummy = False
             self.rb1.reset()
             self.action_selectline.setChecked(False)       
             

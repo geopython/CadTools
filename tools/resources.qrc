@@ -15,6 +15,9 @@
         <file>../icons/select2vertex.png</file>
     </qresource>    
     <qresource prefix="/plugins/cadtools" >
+        <file>../icons/select3points.png</file>
+    </qresource>   
+    <qresource prefix="/plugins/cadtools" >
         <file>../icons/arcintersectionpoint.png</file>
     </qresource>        
     <qresource prefix="/plugins/cadtools" >
@@ -68,6 +71,8 @@
      <qresource prefix="/plugins/cadtools" >
         <file>../icons/parallel.png</file>
     </qresource>
-
+     <qresource prefix="/plugins/cadtools" >
+        <file>../icons/circulararc.png</file>
+    </qresource>
 
 </RCC>
