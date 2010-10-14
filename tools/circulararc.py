@@ -12,6 +12,7 @@ class CircularArc:
         coords = []
         coords.append(ptStart)
         
+        ## Muss umgerechnet werden in Radians....
         arcIncr = 1
         
         center = CircularArc.getArcCenter(ptStart,  ptArc, ptEnd)
@@ -32,7 +33,6 @@ class CircularArc:
             myAlpha = 2.0 * math.acos( 1.0 - ( interValue / 1000 ) / r );
             arcIncr = myAlpha
             print "myAlpha: " + str(myAlpha)
-
 
         a1 = math.atan2( ptStart.y() - center.y(), ptStart.x() - center.x() );
         a2 = math.atan2( ptArc.y() - center.y(), ptArc.x() - center.x() );
