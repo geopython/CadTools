@@ -74,5 +74,8 @@
      <qresource prefix="/plugins/cadtools" >
         <file>../icons/circulararc.png</file>
     </qresource>
+     <qresource prefix="/plugins/cadtools" >
+        <file>../icons/modifycirculararc.png</file>
+    </qresource>    
 
 </RCC>

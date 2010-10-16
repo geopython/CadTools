@@ -20,11 +20,10 @@ from showazimuthtool import ShowAzimuthTool
 from rotateobjecttool import RotateObjectTool
 from parallellinetool import ParallelLineTool
 from circulararctool import CircularArcTool
+from modifycirculararctool import ModifyCircularArcTool
 from orthogonaltraversetool import OrthogonalTraverseTool
 from cadtoolsaboutgui import CadToolsAboutGui
-
-##from cadconsole import *
-
+from cadtoolssettingsgui import CadToolsSettingsGui
 
 
 class CadTools:
@@ -43,13 +42,13 @@ class CadTools:
         self.menu.setTitle( QCoreApplication.translate( "CadTools","&CadTools" ) )
         self.cadtools_help = QAction( QCoreApplication.translate("CadTools", "Help" ), self.iface.mainWindow() )
         self.cadtools_about = QAction( QCoreApplication.translate("CadTools", "About" ), self.iface.mainWindow() )
+        self.cadtools_settings = QAction( QCoreApplication.translate("CadTools", "Settings" ), self.iface.mainWindow() )
         
         # this is just a test.....
 ##        self.cadtools_dock = QAction( QCoreApplication.translate("CadTools","dock test"), self.iface.mainWindow() )
-
 ##        self.menu.addActions( [self.cadtools_help, self.cadtools_about, self.cadtools_dock] )
   
-        self.menu.addActions( [self.cadtools_help, self.cadtools_about] )
+        self.menu.addActions( [self.cadtools_help, self.cadtools_about,  self.cadtools_settings] )
 
         menu_bar = self.iface.mainWindow().menuBar()
         actions = menu_bar.actions()
@@ -58,6 +57,7 @@ class CadTools:
 
         QObject.connect( self.cadtools_about, SIGNAL("triggered()"), self.doAbout )   
         QObject.connect( self.cadtools_help, SIGNAL("triggered()"), self.doHelp )    
+        QObject.connect( self.cadtools_settings, SIGNAL("triggered()"), self.doSettings )    
 
         # this is just a test......... 
 ##        QObject.connect( self.cadtools_dock, SIGNAL("triggered()"), self.doTheDock )    
@@ -71,7 +71,8 @@ class CadTools:
         self.showazimuth = ShowAzimuthTool(self.iface,  self.toolBar)         
         self.rotateobject = RotateObjectTool(self.iface,  self.toolBar)
         self.parallelline = ParallelLineTool(self.iface,  self.toolBar)
-        self.circularart = CircularArcTool(self.iface,  self.toolBar)
+        self.circulararc = CircularArcTool(self.iface,  self.toolBar)
+        self.modifycirculararc = ModifyCircularArcTool(self.iface,  self.toolBar)
         self.orthogonaldigitizer = OrthogonalDigitizerTool(self.iface,  self.toolBar, self.menu)
         
         
@@ -87,6 +88,10 @@ class CadTools:
 
     def doHelp(self):
         webbrowser.open(currentPath + "/help/cadtools_help.html")
+        
+    def doSettings(self):
+        settings = CadToolsSettingsGui(self.iface.mainWindow())
+        settings.show()
 
     def unload(self):
         # remove toolbar and menubar

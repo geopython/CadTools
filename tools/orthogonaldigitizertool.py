@@ -41,7 +41,7 @@ class OrthogonalDigitizerTool():
             # Add the console to the menu and to the toolbar
             toolBar.addSeparator()
             toolBar.addAction(self.act_console)
-            menu.addAction( self.act_console )
+#            menu.addAction( self.act_console )
             
             # Get the tool
             self.tool = OrthogonalDigitizer(self.canvas)

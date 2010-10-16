@@ -12,9 +12,6 @@ class CircularArc:
         coords = []
         coords.append(ptStart)
         
-        ## Muss umgerechnet werden in Radians....
-        arcIncr = 1
-        
         center = CircularArc.getArcCenter(ptStart,  ptArc, ptEnd)
         
         print str(center.toString())
@@ -33,6 +30,9 @@ class CircularArc:
             myAlpha = 2.0 * math.acos( 1.0 - ( interValue / 1000 ) / r );
             arcIncr = myAlpha
             print "myAlpha: " + str(myAlpha)
+        else:
+            arcIncr = interValue * math.pi / 180
+            print "arcIncr:  " + str(arcIncr)
 
         a1 = math.atan2( ptStart.y() - center.y(), ptStart.x() - center.x() );
         a2 = math.atan2( ptArc.y() - center.y(), ptArc.x() - center.x() );
@@ -92,6 +92,12 @@ class CircularArc:
 
 
     def getArcCenter(ptStart,  ptArc,  ptEnd):
+        
+#        print str(ptStart.toString())
+#        print str(ptArc.toString())
+#        print str(ptEnd.toString())
+
+
         bx = ptStart.x()
         by = ptStart.y()
         cx = ptArc.x()
