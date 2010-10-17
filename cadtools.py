@@ -22,6 +22,7 @@ from parallellinetool import ParallelLineTool
 from circulararctool import CircularArcTool
 from modifycirculararctool import ModifyCircularArcTool
 from orthogonaltraversetool import OrthogonalTraverseTool
+from circulararcdigitizertool import CircularArcDigitizerTool
 from cadtoolsaboutgui import CadToolsAboutGui
 from cadtoolssettingsgui import CadToolsSettingsGui
 
@@ -73,6 +74,7 @@ class CadTools:
         self.parallelline = ParallelLineTool(self.iface,  self.toolBar)
         self.circulararc = CircularArcTool(self.iface,  self.toolBar)
         self.modifycirculararc = ModifyCircularArcTool(self.iface,  self.toolBar)
+        self.circulararcdigitizer = CircularArcDigitizerTool(self.iface,  self.toolBar)        
         self.orthogonaldigitizer = OrthogonalDigitizerTool(self.iface,  self.toolBar, self.menu)
         
         

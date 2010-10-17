@@ -664,6 +664,62 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 0.5 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3302"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3372"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3394"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4218"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4240"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4262"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4284"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4306"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -675,9 +731,9 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.9375932"
-     inkscape:cx="-2066.0391"
-     inkscape:cy="-2835.5172"
+     inkscape:zoom="1.3700853"
+     inkscape:cx="-2166.9456"
+     inkscape:cy="-3345.5135"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1544,12 +1600,12 @@
        inkscape:export-xdpi="9.4799995"
        inkscape:export-ydpi="9.4799995" />
     <rect
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.94113398;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:none;stroke:#000000;stroke-width:0.94113398;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3203"
        width="228.57231"
        height="229.40024"
-       x="51.392467"
-       y="1388.0505"
+       x="28.036257"
+       y="1399.7286"
        ry="0" />
     <rect
        style="fill:none;stroke:#000000;stroke-width:0.94113398;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
@@ -4157,8 +4213,8 @@
        id="rect3201-3-8"
        width="228.57231"
        height="229.40024"
-       x="-1081.6274"
-       y="4002.2051"
+       x="-2418.9912"
+       y="4562.1953"
        ry="0"
        inkscape:export-filename="/home/stefan/Pictures/gsi8.png"
        inkscape:export-xdpi="9.4799995"
@@ -4356,8 +4412,8 @@
        inkscape:export-ydpi="9.4799995" />
     <g
        id="g3302-4"
-       transform="translate(-2241.5975,62.777164)"
-       inkscape:export-filename="/home/stefan/.qgis/python/plugins/cadtools/icons/circulararc.png"
+       transform="translate(-2508.6814,528.56121)"
+       inkscape:export-filename="/home/stefan/.qgis/python/plugins/cadtools/icons/capturecirculararc.png"
        inkscape:export-xdpi="9.4799995"
        inkscape:export-ydpi="9.4799995">
       <rect
@@ -4477,5 +4533,212 @@
          x="-2129.5801"
          y="4026.5549"
          style="font-size:85px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">M</tspan></text>
+    <path
+       sodipodi:type="arc"
+       style="fill:none;stroke:#ff0000;stroke-width:12.51811504;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path3256-8"
+       sodipodi:cx="829.19739"
+       sodipodi:cy="1347.9297"
+       sodipodi:rx="61.928421"
+       sodipodi:ry="61.928421"
+       d="m 891.12581,1347.9297 a 61.928421,61.928421 0 0 1 -73.40892,60.855"
+       sodipodi:start="0"
+       sodipodi:end="1.7572582"
+       sodipodi:open="true"
+       transform="matrix(0.81207,-0.0827476,0.08648042,0.777018,-2163.7537,3338.2667)"
+       inkscape:export-filename="/home/stefan/Pictures/ortho1.png"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-ydpi="9.4799995" />
+    <path
+       sodipodi:type="arc"
+       style="fill:none;stroke:#ff0000;stroke-width:11.84352303;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path3260-4"
+       sodipodi:cx="829.19739"
+       sodipodi:cy="1347.9297"
+       sodipodi:rx="61.928421"
+       sodipodi:ry="61.928421"
+       d="m 891.12581,1347.9297 a 61.928421,61.928421 0 0 1 -73.40892,60.855"
+       sodipodi:start="0"
+       sodipodi:end="1.7572582"
+       sodipodi:open="true"
+       transform="matrix(0.06566721,0.7878419,-0.9001061,0.05747697,-64.656601,3585.6054)"
+       inkscape:export-filename="/home/stefan/Pictures/ortho1.png"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-ydpi="9.4799995" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3262-3"
+       sodipodi:cx="727.69568"
+       sodipodi:cy="1939.6815"
+       sodipodi:rx="10.328584"
+       sodipodi:ry="10.328584"
+       d="m 738.02426,1939.6815 a 10.328584,10.328584 0 1 1 -20.65717,0 10.328584,10.328584 0 1 1 20.65717,0 z"
+       transform="matrix(0.5809333,0,0,0.5809333,-1670.1715,3209.2117)"
+       inkscape:export-filename="/home/stefan/Pictures/ortho1.png"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-ydpi="9.4799995" />
+    <path
+       inkscape:export-ydpi="9.4799995"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-filename="/home/stefan/Pictures/ortho1.png"
+       id="path3015-4"
+       d="m -1252.3061,4466.6935 56.6251,0"
+       style="fill:none;stroke:#ffffff;stroke-width:11.66634178;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="9.4799995"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-filename="/home/stefan/Pictures/ortho1.png"
+       id="path3017-9"
+       d="m -1223.9936,4495.5209 0,-56.6252"
+       style="fill:none;stroke:#ffffff;stroke-width:11.66634178;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       style="fill:none;stroke:#2b5d7f;stroke-width:9.62569904;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m -1310.6455,4501.2883 0.215,-96.6223 -70.5005,0 0.3367,-97.3101 165.2717,0.01 -0.3441,91.191 33.5017,-0.1682"
+       id="path2477-2"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:export-filename="/home/stefan/Pictures/ortho1.png"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-ydpi="9.4799995" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3258-0"
+       sodipodi:cx="727.69568"
+       sodipodi:cy="1939.6815"
+       sodipodi:rx="10.328584"
+       sodipodi:ry="10.328584"
+       d="m 738.02426,1939.6815 a 10.328584,10.328584 0 1 1 -20.65717,0 10.328584,10.328584 0 1 1 20.65717,0 z"
+       transform="matrix(-0.01932292,-0.5806119,0.5806119,-0.01932292,-2465.6632,4795.8987)"
+       inkscape:export-filename="/home/stefan/Pictures/ortho1.png"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-ydpi="9.4799995" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#c8e6fa;fill-opacity:1;stroke:#2b5d7f;stroke-width:4.23113489;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3264-6"
+       sodipodi:cx="233.1257"
+       sodipodi:cy="728.0835"
+       sodipodi:rx="8.0666332"
+       sodipodi:ry="8.0666332"
+       d="m 241.19234,728.0835 a 8.0666332,8.0666332 0 1 1 -16.13327,0 8.0666332,8.0666332 0 1 1 16.13327,0 z"
+       transform="matrix(2.3904782,0,0,2.3904782,-1776.4012,2567.9461)"
+       inkscape:export-filename="/home/stefan/Pictures/ortho1.png"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-ydpi="9.4799995" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#c8e6fa;fill-opacity:1;stroke:#2b5d7f;stroke-width:4.23113489;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3266-8"
+       sodipodi:cx="233.1257"
+       sodipodi:cy="728.0835"
+       sodipodi:rx="8.0666332"
+       sodipodi:ry="8.0666332"
+       d="m 241.19234,728.0835 a 8.0666332,8.0666332 0 1 1 -16.13327,0 8.0666332,8.0666332 0 1 1 16.13327,0 z"
+       transform="matrix(2.3904782,0,0,2.3904782,-1937.3884,2567.7197)"
+       inkscape:export-filename="/home/stefan/Pictures/ortho1.png"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-ydpi="9.4799995" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#c8e6fa;fill-opacity:1;stroke:#2b5d7f;stroke-width:4.23113489;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3268-9"
+       sodipodi:cx="233.1257"
+       sodipodi:cy="728.0835"
+       sodipodi:rx="8.0666332"
+       sodipodi:ry="8.0666332"
+       d="m 241.19234,728.0835 a 8.0666332,8.0666332 0 1 1 -16.13327,0 8.0666332,8.0666332 0 1 1 16.13327,0 z"
+       transform="matrix(2.3904782,0,0,2.3904782,-1937.5149,2665.7976)"
+       inkscape:export-filename="/home/stefan/Pictures/ortho1.png"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-ydpi="9.4799995" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#c8e6fa;fill-opacity:1;stroke:#2b5d7f;stroke-width:4.23113489;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3270-2"
+       sodipodi:cx="233.1257"
+       sodipodi:cy="728.0835"
+       sodipodi:rx="8.0666332"
+       sodipodi:ry="8.0666332"
+       d="m 241.19234,728.0835 a 8.0666332,8.0666332 0 1 1 -16.13327,0 8.0666332,8.0666332 0 1 1 16.13327,0 z"
+       transform="matrix(2.3904782,0,0,2.3904782,-1868.8283,2665.5409)"
+       inkscape:export-filename="/home/stefan/Pictures/ortho1.png"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-ydpi="9.4799995" />
+    <path
+       style="fill:#a8bcca;fill-opacity:1;fill-rule:evenodd;stroke:#2b5d7f;stroke-width:10;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m -2033.3106,4412.1516 -19.9299,123.7678"
+       id="path3411-0"
+       inkscape:export-filename="/home/stefan/.qgis/python/plugins/cadtools/icons/capturecirculararc.png"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-ydpi="9.4799995" />
+    <path
+       sodipodi:type="arc"
+       style="fill:none;stroke:#2b5d7f;stroke-width:12.86169293;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path3335-8-6"
+       sodipodi:cx="-2568.0884"
+       sodipodi:cy="3615.7063"
+       sodipodi:rx="116.42851"
+       sodipodi:ry="116.42851"
+       d="m -2458.6386,3576.0032 a 116.42851,116.42851 0 0 1 -159.5765,144.7884"
+       sodipodi:start="5.9351957"
+       sodipodi:end="8.2990686"
+       sodipodi:open="true"
+       transform="matrix(-0.5856882,-0.44107496,0.32951181,-0.78398527,-4650.8853,6146.4008)"
+       inkscape:export-filename="/home/stefan/.qgis/python/plugins/cadtools/icons/capturecirculararc.png"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-ydpi="9.4799995" />
+    <path
+       inkscape:export-ydpi="9.4799995"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-filename="/home/stefan/.qgis/python/plugins/cadtools/icons/capturecirculararc.png"
+       transform="matrix(2.3904782,0,0,2.3904782,-2608.979,2788.3204)"
+       d="m 241.19234,728.0835 a 8.0666332,8.0666332 0 1 1 -16.13327,0 8.0666332,8.0666332 0 1 1 16.13327,0 z"
+       sodipodi:ry="8.0666332"
+       sodipodi:rx="8.0666332"
+       sodipodi:cy="728.0835"
+       sodipodi:cx="233.1257"
+       id="path3326-0-8-4-1"
+       style="fill:#c8e6fa;fill-opacity:1;stroke:#2b5d7f;stroke-width:4.23113489;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       sodipodi:type="arc" />
+    <path
+       inkscape:export-ydpi="9.4799995"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-filename="/home/stefan/.qgis/python/plugins/cadtools/icons/capturecirculararc.png"
+       transform="matrix(2.3904782,0,0,2.3904782,-2592.1918,2686.8668)"
+       d="m 241.19234,728.0835 a 8.0666332,8.0666332 0 1 1 -16.13327,0 8.0666332,8.0666332 0 1 1 16.13327,0 z"
+       sodipodi:ry="8.0666332"
+       sodipodi:rx="8.0666332"
+       sodipodi:cy="728.0835"
+       sodipodi:cx="233.1257"
+       id="path3326-0-8-4-1-5"
+       style="fill:#c8e6fa;fill-opacity:1;stroke:#2b5d7f;stroke-width:4.23113489;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       sodipodi:type="arc" />
+    <path
+       inkscape:export-ydpi="9.4799995"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-filename="/home/stefan/.qgis/python/plugins/cadtools/icons/capturecirculararc.png"
+       transform="matrix(2.3904782,0,0,2.3904782,-2532.3414,2608.0396)"
+       d="m 241.19234,728.0835 a 8.0666332,8.0666332 0 1 1 -16.13327,0 8.0666332,8.0666332 0 1 1 16.13327,0 z"
+       sodipodi:ry="8.0666332"
+       sodipodi:rx="8.0666332"
+       sodipodi:cy="728.0835"
+       sodipodi:cx="233.1257"
+       id="path3326-0-8-4-1-5-0"
+       style="fill:#c8e6fa;fill-opacity:1;stroke:#2b5d7f;stroke-width:4.23113489;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       sodipodi:type="arc" />
+    <path
+       inkscape:export-ydpi="9.4799995"
+       inkscape:export-xdpi="9.4799995"
+       inkscape:export-filename="/home/stefan/.qgis/python/plugins/cadtools/icons/capturecirculararc.png"
+       transform="matrix(2.3904782,0,0,2.3904782,-2444.7556,2653.2924)"
+       d="m 241.19234,728.0835 a 8.0666332,8.0666332 0 1 1 -16.13327,0 8.0666332,8.0666332 0 1 1 16.13327,0 z"
+       sodipodi:ry="8.0666332"
+       sodipodi:rx="8.0666332"
+       sodipodi:cy="728.0835"
+       sodipodi:cx="233.1257"
+       id="path3326-0-8-4-1-5-0-6"
+       style="fill:#c8e6fa;fill-opacity:1;stroke:#2b5d7f;stroke-width:4.23113489;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       sodipodi:type="arc" />
   </g>
 </svg>

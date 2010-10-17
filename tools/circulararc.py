@@ -14,8 +14,11 @@ class CircularArc:
         
         center = CircularArc.getArcCenter(ptStart,  ptArc, ptEnd)
         
-        print str(center.toString())
-    
+        if center == None:
+            coords.append(ptEnd)
+            g = QgsGeometry.fromPolyline(coords)
+            return g
+        
         cx = center.x()
         cy = center.y()
         
@@ -29,10 +32,10 @@ class CircularArc:
         if method == "pitch":
             myAlpha = 2.0 * math.acos( 1.0 - ( interValue / 1000 ) / r );
             arcIncr = myAlpha
-            print "myAlpha: " + str(myAlpha)
+#            print "myAlpha: " + str(myAlpha)
         else:
             arcIncr = interValue * math.pi / 180
-            print "arcIncr:  " + str(arcIncr)
+#            print "arcIncr:  " + str(arcIncr)
 
         a1 = math.atan2( ptStart.y() - center.y(), ptStart.x() - center.x() );
         a2 = math.atan2( ptArc.y() - center.y(), ptArc.x() - center.x() );
@@ -78,7 +81,7 @@ class CircularArc:
 
             point = QgsPoint(x,  y)
             coords.append(point)
-            print str(point.toString())
+#            print str(point.toString())
             
             if angle < a2 and (angle +arcIncr) > a2:
                 coords.append(ptArc)
@@ -93,11 +96,10 @@ class CircularArc:
 
     def getArcCenter(ptStart,  ptArc,  ptEnd):
         
-#        print str(ptStart.toString())
+#        print str(ptStart.toString)
 #        print str(ptArc.toString())
 #        print str(ptEnd.toString())
-
-
+        
         bx = ptStart.x()
         by = ptStart.y()
         cx = ptArc.x()
@@ -110,33 +112,15 @@ class CircularArc:
         cd = (temp - dx * dx - dy * dy) / 2.0
         det = (bx - cx) * (cy - dy) - (cx - dx) * (by - cy)
 
-        det = 1 / det
+        try:
+            det = 1 / det
+            x = (bc * (cy - dy) - cd * (by - cy)) * det
+            y = ((bx - cx) * cd - (cx - dx) * bc) * det
 
-        x = (bc * (cy - dy) - cd * (by - cy)) * det
-        y = ((bx - cx) * cd - (cx - dx) * bc) * det
-
-        return QgsPoint(x, y); 
-
-        
-#        if dist == 0:
-#            points = [p1,  p2]
-#            g = QgsGeometry.fromPolyline(points)
-#            return g
-#    
-#        dn = ( (p1.x()-p2.x())**2 + (p1.y()-p2.y())**2 )**0.5
-#        x3 = p1.x() + dist*(p1.y()-p2.y()) / dn
-#        y3 = p1.y() - dist*(p1.x()-p2.x()) / dn  
-#        p3 = QgsPoint(x3,  y3)       
-#      
-#        x4 = p2.x() + dist*(p1.y()-p2.y()) / dn
-#        y4 = p2.y() - dist*(p1.x()-p2.x()) / dn  
-#        p4 = QgsPoint(x4,  y4)       
-#        
-#        points =  [p3,  p4]
-#        g = QgsGeometry.fromPolyline(points)
-#        
-#        return g
-
+            return QgsPoint(x, y);             
+            
+        except ZeroDivisionError:
+            return None
 
         
     getInterpolatedArc = staticmethod(getInterpolatedArc)

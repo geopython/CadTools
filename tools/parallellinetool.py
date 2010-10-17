@@ -164,7 +164,7 @@ class ParallelLineTool:
             
             
         def deactivate(self):
-            print "***************** deactivate"  
+            print "***************** deactivate parallellinetool"  
             self.dummy = False
             self.rb1.reset()
             self.action_selectline.setChecked(False)       

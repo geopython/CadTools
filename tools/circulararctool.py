@@ -85,7 +85,7 @@ class CircularArcTool:
       
 
         def deactivate(self):
-            print "***************** deactivate"            
+            print "***************** deactivate circulararctool"            
             self.action_selectthreepoints.setChecked(False)   
             
 

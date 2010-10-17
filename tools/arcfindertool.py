@@ -3,6 +3,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from qgis.core import *
 from qgis.gui import *
+import math
 
 from circulararc import CircularArc
 import cadutils
@@ -20,6 +21,8 @@ class ArcFinderTool(QgsMapTool):
         self.ptArc = None
         self.ptEnd = None
         self.clicked = False
+        self.featId = None
+        self.movingVertex = "arc"
         self.cursor = QCursor(QPixmap(["16 16 3 1",
                                       "      c None",
                                       ".     c #FF0000",
@@ -45,9 +48,6 @@ class ArcFinderTool(QgsMapTool):
     
  
     def canvasPressEvent(self, event):
-    
-        if self.rb1 != None:
-            self.rb1.reset(False)
 
         x = event.pos().x()
         y = event.pos().y()
@@ -59,17 +59,14 @@ class ArcFinderTool(QgsMapTool):
         (retval, result) = snapper.snapToCurrentLayer (startingPoint, QgsSnapper.SnapToVertex)
         
         if result <> []:
-            print str(result[0].snappedVertex.toString())
-            print str(result[0].snappedAtGeometry)
-            
+
             self.clicked = True
             
             feat = QgsFeature()
-            self.layer.featureAtId(result[0].snappedAtGeometry,  feat,  True,  False)
+            self.featId = result[0].snappedAtGeometry
+            self.layer.featureAtId(self.featId,  feat,  True,  False)
             
             wkbType = feat.geometry().wkbType()
-            print "*************"
-            print str(feat.geometry().wkbType())
             
             if wkbType == 2:
                 line = feat.geometry().asPolyline()
@@ -80,54 +77,125 @@ class ArcFinderTool(QgsMapTool):
                 QMessageBox.information(None,  "Modify Circular Arc",  "Unsupported geometry type.")
                 return
             
-            ## The three arc points are the first and the last one
-            ## from the linestring and the snapped vertex.
-            ## TODO: falls erster oder letzter geklickt.......
-            self.ptStart = line[0]
-            self.ptArc = result[0].snappedVertex
-            self.ptEnd = line[len(line)-1]
+            ## Get the three arc points. 
+            ## a) the snapped vertex is the first point of the linestring
+            ## b) it is the last one
+            ## c) neither first nor last one
+            if result[0].beforeVertexNr == -1 and result[0].snappedVertexNr == 0:
+                self.ptStart = result[0].snappedVertex
+                self.ptArc = line[int(len(line)/2)]
+                self.ptEnd = line[len(line)-1]
+                self.movingVertex = "start"
             
-            # Unterscheidung hier, speicher und dann beim moveevent unterscheiden
-            
-            print str(self.ptStart.toString())
-            print str(self.ptArc.toString())
-            print str(self.ptEnd.toString())
+            elif result[0].afterVertexNr == -1 and result[0].snappedVertexNr == ( len(line) - 1 ):
+                self.ptStart = line[0]
+                self.ptArc = line[int(len(line)/2)]
+                self.ptEnd = result[0].snappedVertex
+                self.movingVertex = "end"                
+                
+            else:
+                self.ptStart = line[0]
+                self.ptArc = result[0].snappedVertex
+                self.ptEnd = line[len(line)-1]
+                self.movingVertex = "arc"
 
-            self.rb1 = self.createRubberBand( QColor(255,0,0) );
-            self.rb1.setToGeometry( feat.geometry(), self.layer );
-            
             self.rb2 = self.createRubberBand( QColor(0, 0, 255) )
             
 
     def canvasMoveEvent(self,event):
-        if self.rb1 != None and self.clicked == True:
-            print "************************mouse bewegen aber nur mit rubberband...."
-            
-            newPoint = self.toLayerCoordinates( self.layer, event.pos() )
-            
-            ## Calculate the new circular arc.
-            settings = QSettings("CatAIS","cadtools")
-            value = settings.value("arcs/featureangle",  5)
+        if self.featId != None and self.clicked == True:
+            ## Try to snap to active or background layer first.
+            x = event.pos().x()
+            y = event.pos().y()
+            startingPoint = QPoint(x,y)            
+            snapper = QgsMapCanvasSnapper(self.canvas)
+            (retval,result) = snapper.snapToCurrentLayer (startingPoint,QgsSnapper.SnapToVertex)   
+            if result <> []:
+                newPoint = result[0].snappedVertex
+            else:
+                (retval,result) = snapper.snapToBackgroundLayers(startingPoint)
+                if result <> []:
+                    newPoint = result[0].snappedVertex
+                else:
+                    newPoint = self.toLayerCoordinates( self.layer, event.pos() )
 
-            g = CircularArc.getInterpolatedArc(self.ptStart,  newPoint,  self.ptEnd,  "angle",   value.toDouble()[0])
-        
-#            
-#            cadutils.addGeometryToCadLayer(g)     
-#            self.canvas.refresh()
-#            
+            ## Create the new geometry (circular arc) for the moving rubberband and 
+            ## the final feature.
+            settings = QSettings("CatAIS","cadtools")
+            value = settings.value("arcs/rubberangle",  5)
+            if self.movingVertex == "arc":
+                g = CircularArc.getInterpolatedArc(self.ptStart,  newPoint,  self.ptEnd,  "angle",   value.toDouble()[0])                
+            elif self.movingVertex == "start":
+                g = CircularArc.getInterpolatedArc(newPoint,  self.ptArc,  self.ptEnd,  "angle",   value.toDouble()[0])
+            elif self.movingVertex == "end":
+                g = CircularArc.getInterpolatedArc(self.ptStart,  self.ptArc,  newPoint,  "angle",   value.toDouble()[0])                
+                
             self.rb2.setToGeometry( g, self.layer );
             
+#            print str(self.ptStart.toString())
+#            print str(newPoint.toString())
+#            print str(self.ptEnd.toString())
             
-        
         pass
   
   
     def canvasReleaseEvent(self,event):
-        print "************************* release...."
-        self.clicked = False
-        print str(self.clicked)
+        if self.rb2 <> None:
+            ## Reset the rubberband.
+            self.rb2.reset()
+            self.rb2 = None
+            
+            ## What happens to newPoint???? Even as self.newPoint it 
+            ## does not work....
+            ## We just snap again....
+            x = event.pos().x()
+            y = event.pos().y()
+            startingPoint = QPoint(x,y)            
+            snapper = QgsMapCanvasSnapper(self.canvas)
+            (retval,result) = snapper.snapToCurrentLayer (startingPoint,QgsSnapper.SnapToVertex)   
+            if result <> []:
+                newPoint = result[0].snappedVertex
+            else:
+                (retval,result) = snapper.snapToBackgroundLayers(startingPoint)
+                if result <> []:
+                    newPoint = result[0].snappedVertex
+                else:
+                    newPoint = self.toLayerCoordinates( self.layer, event.pos() )
         
-        self.rb2.reset()        
+            ## Modify the feature.
+            settings = QSettings("CatAIS","cadtools")
+            method = settings.value("arcs/featuremethod",  "pitch")
+            if method == "pitch":
+                value = settings.value("arcs/featurepitch",  2)
+            else:
+                value = settings.value("arcs/featureangle",  1)
+            if self.movingVertex == "arc":
+                g = CircularArc.getInterpolatedArc(self.ptStart,  newPoint,  self.ptEnd,  method,   value.toDouble()[0])                
+            elif self.movingVertex == "start":
+                g = CircularArc.getInterpolatedArc(newPoint,  self.ptArc,  self.ptEnd,  method, value.toDouble()[0])
+            elif self.movingVertex == "end":
+                g = CircularArc.getInterpolatedArc(self.ptStart,  self.ptArc,  newPoint,  method, value.toDouble()[0])    
+                
+            ## On the Fly reprojection of the geometry (only if needed)
+            layerEPSG = self.layer.srs().epsg()
+            projectEPSG = self.canvas.mapRenderer().destinationSrs().epsg()
+            if layerEPSG != projectEPSG:
+                layerSRS = self.layer.srs()
+                projectSRS = self.canvas.mapRenderer().destinationSrs()
+                coordtrans = QgsCoordinateTransform(layerSRS,  projectSRS)
+                g.transform(coordtrans)
+        
+            self.layer.beginEditCommand("Geometry modified.")
+            self.layer.changeGeometry(self.featId,  g)
+            self.layer.endEditCommand()
+            self.layer.setModified(True,  True)
+            self.layer.reload()
+            self.canvas.refresh()
+            
+        ## Reset some stuff.
+        self.clicked = False
+        self.featId = None
+        
         pass
 
 
@@ -155,15 +223,12 @@ class ArcFinderTool(QgsMapTool):
           m.setMessageAsHtml( "<p>Could not snap vertex.</p><p>Have you set the tolerance in Settings > Project Properties > General?</p>")
           m.showMessage()
     
+    
     def activate(self):
         self.canvas.setCursor(self.cursor)
-        
-  
+
+
     def deactivate(self):
-        self.canvas.scene().removeItem(self.m1)
-        self.m1 = None
-        if self.rb1 <> None:
-            self.rb1.reset()
         if self.rb2 <> None:
             self.rb2.reset()
         pass
@@ -175,6 +240,7 @@ class ArcFinderTool(QgsMapTool):
 
     def isTransient(self):
         return False
+    
     
     def isEditTool(self):
         return True
