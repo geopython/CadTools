@@ -74,11 +74,12 @@ class SingleSegmentFinderTool(QgsMapTool):
         self.rb1.addPoint(result[0].beforeVertex)
         self.rb1.addPoint(result[0].afterVertex)
         self.rb1.show()
-
-#        QMessageBox.information(None,  "Cancel",  str(self.rb1.getPoint(0, 0)) + " - " + str(self.rb1.getPoint(0, 2)) )
         
-        #tell the world about the segment
-        self.emit(SIGNAL("segmentFound(PyQt_PyObject)"), [self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 2),  self.rb1])
+        if QGis.QGIS_VERSION_INT >= 10700:        
+            self.emit(SIGNAL("segmentFound(PyQt_PyObject)"), [self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 1),  self.rb1])
+        else:
+            self.emit(SIGNAL("segmentFound(PyQt_PyObject)"), [self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 2),  self.rb1])
+            
          
       else:
         #warn about missing snapping tolerance if appropriate

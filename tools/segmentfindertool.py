@@ -76,7 +76,6 @@ class SegmentFinderTool(QgsMapTool):
             self.rb1.show()
 
         if self.count == 1:
-            #QMessageBox.information(None,  "Cancel",  str("1"))            
             self.rb2.reset()
             self.rb2.setColor(color)
             self.rb2.setWidth(2)
@@ -84,14 +83,14 @@ class SegmentFinderTool(QgsMapTool):
             self.rb2.addPoint(result[0].beforeVertex)
             self.rb2.addPoint(result[0].afterVertex)
             self.rb2.show()        
-                
-            #QMessageBox.information(None,  "Cancel",  str("p21: ")+str(self.p21))
             
         if self.count == 2:
-            #QMessageBox.information(None,  "Cancel",  str("2"))
             self.rb1.reset()
             self.rb1.addPoint(self.rb2.getPoint(0, 0)) 
-            self.rb1.addPoint(self.rb2.getPoint(0, 2)) 
+            if QGis.QGIS_VERSION_INT >= 10700:            
+                self.rb1.addPoint(self.rb2.getPoint(0, 1)) 
+            else:
+                self.rb1.addPoint(self.rb2.getPoint(0, 2)) 
             self.rb1.show()
                         
             self.rb2.reset() 
@@ -107,7 +106,10 @@ class SegmentFinderTool(QgsMapTool):
         
         #tell the world about the segments  
         if self.count == 2:
-            self.emit(SIGNAL("segmentsFound(PyQt_PyObject)"), [self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 2),  self.rb2.getPoint(0, 0),  self.rb2.getPoint(0, 2)])
+            if QGis.QGIS_VERSION_INT >= 10700:
+                self.emit(SIGNAL("segmentsFound(PyQt_PyObject)"), [self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 1),  self.rb2.getPoint(0, 0),  self.rb2.getPoint(0, 1)])
+            else:
+                self.emit(SIGNAL("segmentsFound(PyQt_PyObject)"), [self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 2),  self.rb2.getPoint(0, 0),  self.rb2.getPoint(0, 2)])
          
       else:
         #warn about missing snapping tolerance if appropriate
