@@ -3,7 +3,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from qgis.core import *
 
-import resources
+from cadtools import resources
 
 ## Import own classes and tools.
 from threearcpointsfindertool import ThreeArcPointsFinderTool

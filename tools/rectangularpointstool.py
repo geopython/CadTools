@@ -6,7 +6,7 @@ from qgis.core import *
 from qgis.gui import *
 
 # Initialize Qt resources from file resources.py
-import resources
+from cadtools import resources
 
 #Import own classes and tools
 from rectangularpointsgui import RectangularPointsGui
@@ -53,7 +53,7 @@ class RectangularPointsTool():
                 self.ctrl.initGui()
                 self.ctrl.show()
                 # connect the signals
-                QObject.connect(self.ctrl, SIGNAL("coordSegments(double, double, boolean)"), self.calculateRectangularPoint)
+                QObject.connect(self.ctrl, SIGNAL("coordSegments(double, double, bool)"), self.calculateRectangularPoint)
                 QObject.connect(self.ctrl, SIGNAL("closeRectangularPointsGui()"), self.deactivate)            
                 QObject.connect(self.ctrl, SIGNAL("unsetTool()"), self.unsetTool)
                          

@@ -6,26 +6,24 @@ from qgis.core import *
 import webbrowser, os
 import os.path, sys
 
-# Set up current path, so that we know where to look for modules
+# Set up current path.
 currentPath = os.path.dirname( __file__ )
-sys.path.append( os.path.abspath( os.path.dirname( __file__) + '/tools' ) )
 
 #Import own tools
-from lineintersectiontool import LineIntersectionTool
-from arcintersectiontool import ArcIntersectionTool
-from orthogonaldigitizertool import OrthogonalDigitizerTool
-from orthoelementsonsegmenttool import OrthoElementsOnSegmentTool
-from rectangularpointstool import RectangularPointsTool
-from showazimuthtool import ShowAzimuthTool
-from rotateobjecttool import RotateObjectTool
-from parallellinetool import ParallelLineTool
-from circulararctool import CircularArcTool
-from modifycirculararctool import ModifyCircularArcTool
-from orthogonaltraversetool import OrthogonalTraverseTool
-from circulararcdigitizertool import CircularArcDigitizerTool
+from tools.lineintersectiontool import LineIntersectionTool
+from tools.arcintersectiontool import ArcIntersectionTool
+from tools.orthogonaldigitizertool import OrthogonalDigitizerTool
+from tools.orthoelementsonsegmenttool import OrthoElementsOnSegmentTool
+from tools.rectangularpointstool import RectangularPointsTool
+from tools.showazimuthtool import ShowAzimuthTool
+from tools.rotateobjecttool import RotateObjectTool
+from tools.parallellinetool import ParallelLineTool
+from tools.circulararctool import CircularArcTool
+from tools.modifycirculararctool import ModifyCircularArcTool
+from tools.orthogonaltraversetool import OrthogonalTraverseTool
+from tools.circulararcdigitizertool import CircularArcDigitizerTool
+from tools.cadtoolssettingsgui import CadToolsSettingsGui
 from cadtoolsaboutgui import CadToolsAboutGui
-from cadtoolssettingsgui import CadToolsSettingsGui
-
 
 class CadTools:
 

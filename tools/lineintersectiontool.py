@@ -5,7 +5,7 @@ from PyQt4.QtGui import *
 from qgis.core import *
 
 # Initialize Qt resources from file resources.py
-import resources
+from cadtools import resources
 
 #Import own classes and tools
 from segmentfindertool import SegmentFinderTool

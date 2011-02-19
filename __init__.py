@@ -7,13 +7,16 @@ def description():
     return "Some tools to perform cad like functions."
 
 def version():
-    return "0.5.1"
+    return "0.5.3"
 
 def qgisMinimumVersion():
     return "1.3"
 
 def authorName():
     return "Stefan Ziegler"
+    
+def icon():
+	return "icons/orthopoint.png"        
 
 def classFactory(iface):
     return CadTools(iface)

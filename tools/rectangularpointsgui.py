@@ -23,7 +23,7 @@ class RectangularPointsGui(QDialog, QObject, Ui_RectangularPoints):
         
     @pyqtSignature("on_btnAdd_clicked()")    
     def on_btnAdd_clicked(self):
-        self.emit(SIGNAL("coordSegments(double, double, boolean)"),  self.sboxA.value(),  self.sboxO.value(),  self.chckBoxInvert.isChecked())        
+        self.emit(SIGNAL("coordSegments(double, double, bool)"),  self.sboxA.value(),  self.sboxO.value(),  self.chckBoxInvert.isChecked())        
         #self.close()
         
     @pyqtSignature("on_btnCancel_clicked()")    
