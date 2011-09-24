@@ -60,7 +60,7 @@ class CircularArc:
         else:
             sweep = 0.0;
 
-        ptcount = math.ceil( math.fabs ( sweep / arcIncr ) )
+        ptcount = int(math.ceil( math.fabs ( sweep / arcIncr ) ))
 
         if sweep < 0: 
             arcIncr *= -1.0;

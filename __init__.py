@@ -7,7 +7,7 @@ def description():
     return "Some tools to perform cad like functions."
 
 def version():
-    return "0.5.3"
+    return "0.5.4"
 
 def qgisMinimumVersion():
     return "1.3"
