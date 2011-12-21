@@ -97,21 +97,27 @@ class OrthogonalDigitizer(QgsMapTool):
     if self.isPolygon == True:
         if self.mCtrl == True:
             # we will move the first point to close the polygon square... (square??)
+            # NO: move the last point!
         
             # the last segment 
+#            pn = self.rb.getPoint(0,  self.rb.numberOfVertices()-2)
+#            pm = self.rb.getPoint(0,  self.rb.numberOfVertices()-1)
             pn = self.rb.getPoint(0,  self.rb.numberOfVertices()-2)
             pm = self.rb.getPoint(0,  self.rb.numberOfVertices()-1)
-        
-            # but we need a line segment that ist orthogonal to the last segment
+            
+            p1 = self.rb.getPoint(0, 0)
+            p2 = self.rb.getPoint(0, 1)
+
+            # but we need a line segment that is orthogonal to the last segment
             # der letzte Punkt ist der Aufpunkt
             # der Richtungsvektor ist der Vektor, der rechwinklig zum Differenzvektor pn-pm liegt (-> x/y vertauschen)
             d = ( (pn.x()-pm.x())**2 + (pn.y()-pm.y())**2 )**0.5
-            xp = pm.x() + (pm.y()-pn.y()) 
-            yp = pm.y() - (pm.x()-pn.x())  
+            xp = p1.x() + (p1.y()-p2.y()) 
+            yp = p1.y() - (p1.x()-p2.x())  
             pp = QgsPoint(xp,  yp)
         
-            p0 = LineIntersection.intersectionPoint(self.rb.getPoint(0,  0),  self.rb.getPoint(0,  1),  pm,  pp)
-            self.rb.movePoint(0,  p0,  0)
+            p0 = LineIntersection.intersectionPoint(pn, pm, p1, pp)
+            self.rb.movePoint(self.rb.numberOfVertices()-1, p0, 0)
         
     coords = []
     [coords.append(self.rb.getPoint(0, i)) for i in range(self.rb.numberOfVertices())]
