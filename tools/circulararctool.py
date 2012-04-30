@@ -23,8 +23,8 @@ class CircularArcTool:
             self.p3 = None
             
             # Create actions 
-            self.action_selectthreepoints = QAction(QIcon(":/plugins/cadtools/icons/select3points.png"),  "Select Three Points",  self.iface.mainWindow())
-            self.action_circulararc = QAction(QIcon(":/plugins/cadtools/icons/circulararc.png"),  "Create Circular Arc",  self.iface.mainWindow())
+            self.action_selectthreepoints = QAction(QIcon(":/plugins/cadtools/icons/select3points.png"), QCoreApplication.translate("ctools", "Select Three Points"),  self.iface.mainWindow())
+            self.action_circulararc = QAction(QIcon(":/plugins/cadtools/icons/circulararc.png"), QCoreApplication.translate("ctools", "Create Circular Arc"),  self.iface.mainWindow())
             self.action_selectthreepoints.setCheckable(True)      
       
             # Connect to signals for button behaviour      
@@ -65,7 +65,7 @@ class CircularArcTool:
                 value = settings.value("arcs/featureangle",  1)
 
             if self.p1 == None or self.p2 == None or self.p3 == None:
-                QMessageBox.information(None,  "Cancel",  "Not enough points selected.")
+                QMessageBox.information(None, QCoreApplication.translate("ctools", "Cancel"), QCoreApplication.translate("ctools", "Not enough points selected."))
             else:
                 g = CircularArc.getInterpolatedArc(self.p1,  self.p2,  self.p3,  method.toString(),  value.toDouble()[0])
                 cadutils.addGeometryToCadLayer(g)     

@@ -26,8 +26,8 @@ class LineIntersectionTool():
             self.p22 = None
             
             # Create actions 
-            self.act_intersection= QAction(QIcon(":/plugins/cadtools/icons/pointandline.png"),  "Intersection Point",  self.iface.mainWindow())
-            self.act_s2s= QAction(QIcon(":/plugins/cadtools/icons/select2lines.png"),  "Select 2 Line Segments",  self.iface.mainWindow())
+            self.act_intersection= QAction(QIcon(":/plugins/cadtools/icons/pointandline.png"),  QCoreApplication.translate("ctools", "Intersection Point"),  self.iface.mainWindow())
+            self.act_s2s= QAction(QIcon(":/plugins/cadtools/icons/select2lines.png"),  QCoreApplication.translate("ctools", "Select 2 Line Segments"),  self.iface.mainWindow())
             self.act_s2s.setCheckable(True)            
             
             # Connect to signals for button behaviour
@@ -64,7 +64,7 @@ class LineIntersectionTool():
 
         def intersection(self):
             if self.p11 == None or self.p12 == None or self.p21 == None or self.p22 == None:
-                QMessageBox.information(None,  "Cancel",  "Not enough line segments selected.")
+                QMessageBox.information(None, QCoreApplication.translate("ctools", "Cancel"), QCoreApplication.translate("ctools", "Not enough line segments selected."))
             else:
                 p = QgsPoint()
                 p = LineIntersection.intersectionPoint(self.p11,  self.p12,  self.p21,  self.p22)
@@ -88,7 +88,7 @@ class LineIntersectionTool():
                                 
         def intersect_line(self):
             if self.p11 == None or self.p12 == None or self.p21 == None or self.p22 == None:
-                QMessageBox.information(None,  "Cancel",  "Not enough line segments selected.")
+                QMessageBox.information(None, QCoreApplication.translate("ctools", "Cancel"), QCoreApplication.translate("ctools", "Not enough line segments selected."))
             else:
                 g = None
                 g = LineIntersection.intersectionLine(self.p11,  self.p12,  self.p21,  self.p22)

@@ -74,7 +74,7 @@ class ArcFinderTool(QgsMapTool):
                 line = feat.geometry().asMultiPolyline()
                 line = line[0]
             else: 
-                QMessageBox.information(None,  "Modify Circular Arc",  "Unsupported geometry type.")
+                QMessageBox.information(None,  QCoreApplication.translate("ctools", "Modify Circular Arc"),  QCoreApplication.translate("ctools", "Unsupported geometry type."))
                 return
             
             ## Get the three arc points. 

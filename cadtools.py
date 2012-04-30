@@ -20,6 +20,7 @@ from tools.rotateobjecttool import RotateObjectTool
 from tools.parallellinetool import ParallelLineTool
 from tools.circulararctool import CircularArcTool
 from tools.modifycirculararctool import ModifyCircularArcTool
+from tools.horizontalverticaldigitizertool import HorizontalVerticalDigitizerTool
 from tools.orthogonaltraversetool import OrthogonalTraverseTool
 from tools.circulararcdigitizertool import CircularArcDigitizerTool
 from tools.cadtoolssettingsgui import CadToolsSettingsGui
@@ -31,6 +32,28 @@ class CadTools:
     # Save reference to the QGIS interface
         self.iface = iface
         self.canvas = self.iface.mapCanvas()
+
+        # Initialise the translation environment.
+        userPluginPath = QFileInfo(QgsApplication.qgisUserDbFilePath()).path()+"/python/plugins/cadtools"  
+        systemPluginPath = QgsApplication.prefixPath()+"/share/qgis/python/plugins/cadtools"
+        locale = QSettings().value("locale/userLocale").toString()
+        myLocale = locale[0:2]       
+        
+        QgsMessageLog.logMessage(str(myLocale),  'cadtools')
+    
+        if QFileInfo(userPluginPath).exists():
+          pluginPath = userPluginPath+"/i18n/cadtools_"+myLocale+".qm"
+          QgsMessageLog.logMessage(str(pluginPath),  'cadtools')
+        elif QFileInfo(systemPluginPath).exists():
+          pluginPath = systemPluginPath+"/i18n/cadtools_"+myLocale+".qm"
+
+        self.localePath = pluginPath
+        if QFileInfo(self.localePath).exists():
+          self.translator = QTranslator()
+          self.translator.load(self.localePath)
+          
+          if qVersion() > '4.3.3':        
+            QCoreApplication.installTranslator(self.translator)
 
     def initGui(self):
         # Add toolbar 
@@ -72,7 +95,8 @@ class CadTools:
         self.parallelline = ParallelLineTool(self.iface,  self.toolBar)
         self.circulararc = CircularArcTool(self.iface,  self.toolBar)
         self.modifycirculararc = ModifyCircularArcTool(self.iface,  self.toolBar)
-        self.circulararcdigitizer = CircularArcDigitizerTool(self.iface,  self.toolBar)        
+        self.circulararcdigitizer = CircularArcDigitizerTool(self.iface,  self.toolBar)      
+        self.hovedigitizer = HorizontalVerticalDigitizerTool(self.iface, self.toolBar)
         self.orthogonaldigitizer = OrthogonalDigitizerTool(self.iface,  self.toolBar, self.menu)
         
         

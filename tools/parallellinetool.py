@@ -33,8 +33,8 @@ class ParallelLineTool:
             self.dummy = False
             
             # Create actions 
-            self.action_selectline = QAction(QIcon(":/plugins/cadtools/icons/select1line_v2.png"),  "Select one linesegment",  self.iface.mainWindow())
-            self.action_parallelline = QAction(QIcon(":/plugins/cadtools/icons/parallel.png"),  "Create parallel line",  self.iface.mainWindow())
+            self.action_selectline = QAction(QIcon(":/plugins/cadtools/icons/select1line_v2.png"), QCoreApplication.translate("ctools", "Select one linesegment"),  self.iface.mainWindow())
+            self.action_parallelline = QAction(QIcon(":/plugins/cadtools/icons/parallel.png"), QCoreApplication.translate("ctools", "Create parallel line"),  self.iface.mainWindow())
             self.action_selectline.setCheckable(True)      
       
             # Connect to signals for button behaviour      
@@ -78,7 +78,7 @@ class ParallelLineTool:
                 self.p1 = None
                 self.p2 = None
                 self.m1 = None                   
-                QMessageBox.information(None,  "Cancel",  "No linesegment selected.")
+                QMessageBox.information(None, QCoreApplication.translate("ctools", "Cancel"), QCoreApplication.translate("ctools", "No linesegment selected."))
             else:
                 flags = Qt.WindowTitleHint | Qt.WindowSystemMenuHint | Qt.WindowMaximizeButtonHint  # QgisGui.ModalDialogFlags
                 self.ctrl = ParallelLineGui(self.iface.mainWindow(),  flags)

@@ -1,13 +1,14 @@
 from cadtools import CadTools
+from PyQt4.QtCore import *
 
 def name():
     return "CadTools"
 
 def description():
-    return "Some tools to perform cad like functions."
+    return QCoreApplication.translate("init", "Some tools to perform cad like functions.")
 
 def version():
-    return "0.5.5"
+    return "0.5.7"
 
 def qgisMinimumVersion():
     return "1.3"

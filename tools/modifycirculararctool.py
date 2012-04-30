@@ -24,7 +24,7 @@ class ModifyCircularArcTool:
             self.p3 = None
             
             # Create actions 
-            self.action_modifycirculararc = QAction(QIcon(":/plugins/cadtools/icons/modifycirculararc.png"),  "Modify Circular Arc",  self.iface.mainWindow())
+            self.action_modifycirculararc = QAction(QIcon(":/plugins/cadtools/icons/modifycirculararc.png"), QCoreApplication.translate("ctools", "Modify Circular Arc"),  self.iface.mainWindow())
             self.action_modifycirculararc.setCheckable(True) 
             self.action_modifycirculararc.setEnabled(False) 
       
@@ -50,7 +50,7 @@ class ModifyCircularArcTool:
             
             self.type = vlayer.geometryType()
             if self.type <> 1:
-                QMessageBox.information(None,  "Modify Circular Arc",  "Unsupported geometry type.")
+                QMessageBox.information(None, QCoreApplication.translate("ctools", "Modify Circular Arc"), QCoreApplication.translate("ctools", "Unsupported geometry type."))
                 self.action_modifycirculararc.setChecked(False)   
                 return
             

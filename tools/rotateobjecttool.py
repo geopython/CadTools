@@ -21,8 +21,8 @@ class RotateObjectTool:
         self.feat = None
         self.rb = None
         
-        self.act_rotateobject = QAction(QIcon(":/plugins/cadtools/icons/rotatefeature.png"),  "Rotate Object",  self.iface.mainWindow())
-        self.act_selectvertexandobject= QAction(QIcon(":/plugins/cadtools/icons/selectvertexandfeature.png"),  "Select Vertex and Object",  self.iface.mainWindow())
+        self.act_rotateobject = QAction(QIcon(":/plugins/cadtools/icons/rotatefeature.png"), QCoreApplication.translate("ctools", "Rotate Object"),  self.iface.mainWindow())
+        self.act_selectvertexandobject= QAction(QIcon(":/plugins/cadtools/icons/selectvertexandfeature.png"), QCoreApplication.translate("ctools", "Select Vertex and Object"),  self.iface.mainWindow())
         self.act_selectvertexandobject.setCheckable(True)     
              
         QObject.connect(self.act_rotateobject,  SIGNAL("triggered()"),  self.showDialog)
@@ -56,7 +56,7 @@ class RotateObjectTool:
     def showDialog(self):
         
         if self.p1 == None or self.feat == None:
-            QMessageBox.information(None,  "Cancel",  "Not enough objects selected.")
+            QMessageBox.information(None, QCoreApplication.translate("ctools", "Cancel"), QCoreApplication.translate("ctools", "Not enough objects selected."))
         else:
             #az = Azimuth.calculate(self.p1,  self.p2)
             

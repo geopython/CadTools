@@ -27,8 +27,8 @@ class OrthoElementsOnSegmentTool:
             self.p3 = None
                             
             # Create actions 
-            self.act_ortholineandpoint = QAction(QIcon(":/plugins/cadtools/icons/orthopointandline.png"),  "Orthogonal Line and Intersection Point",  self.iface.mainWindow())
-            self.act_selectvertexandline = QAction(QIcon(":/plugins/cadtools/icons/selectthreevertex.png"),  "Select Vertex Points",  self.iface.mainWindow())
+            self.act_ortholineandpoint = QAction(QIcon(":/plugins/cadtools/icons/orthopointandline.png"), QCoreApplication.translate("ctools", "Orthogonal Line and Intersection Point"),  self.iface.mainWindow())
+            self.act_selectvertexandline = QAction(QIcon(":/plugins/cadtools/icons/selectthreevertex.png"), QCoreApplication.translate("ctools", "Select Vertex Points"),  self.iface.mainWindow())
             self.act_selectvertexandline.setCheckable(True)   
       
             # Connect to signals for button behaviour      
@@ -58,7 +58,7 @@ class OrthoElementsOnSegmentTool:
         def ortholineandpoint(self):
 
             if self.p1 == None or self.p2 == None or self.p3 == None:
-                QMessageBox.information(None,  "Cancel",  "Not enough objects selected.")
+                QMessageBox.information(None, QCoreApplication.translate("ctools", "Cancel"), QCoreApplication.translate("ctools", "Not enough objects selected."))
             else:
                 # Intersection of the selected segment and the orthogonal line through the selected point
                 # Selektierter Punkt ist Aufpunkt (= p1)

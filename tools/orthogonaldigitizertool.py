@@ -24,7 +24,7 @@ class OrthogonalDigitizerTool():
             
             # Create actions 
             self.act_console = QAction(QIcon(":/plugins/cadtools/icons/cadconsole2.png"), QCoreApplication.translate("CadTools","Cad Console"), self.iface.mainWindow() )
-            self.act_ortho = QAction(QIcon(":/plugins/cadtools/icons/ortho.png"),  "Capture Orthogonal Lines/Polygons",  self.iface.mainWindow())
+            self.act_ortho = QAction(QIcon(":/plugins/cadtools/icons/ortho2.png"), QCoreApplication.translate("ctools", "Capture Orthogonal Lines/Polygons"),  self.iface.mainWindow())
             self.act_ortho.setEnabled(False)
             self.act_ortho.setCheckable(True)            
             
@@ -56,7 +56,6 @@ class OrthogonalDigitizerTool():
             self.iface.addDockWidget(Qt.BottomDockWidgetArea, self.dockWidget)
             
          
-        # Select 2 Line Segments
         def orthodigitize(self):
             mc = self.canvas
             layer = mc.currentLayer()
@@ -64,7 +63,8 @@ class OrthogonalDigitizerTool():
             # Set OrthogonalTool as current tool
             mc.setMapTool(self.tool)
             self.act_ortho.setChecked(True)    
-                
+
+
         def toggle(self):
             mc = self.canvas
             layer = mc.currentLayer()
@@ -85,7 +85,8 @@ class OrthogonalDigitizerTool():
                             self.act_ortho.setEnabled(False)
                             QObject.connect(layer,SIGNAL("editingStarted()"),self.toggle)
                             QObject.disconnect(layer,SIGNAL("editingStopped()"),self.toggle)                   
-                
+
+
         def deactivate(self):
             #uncheck the button/menu and get rid off the SFtool signal
             self.act_ortho.setChecked(False)

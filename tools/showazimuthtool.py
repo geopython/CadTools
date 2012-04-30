@@ -25,8 +25,8 @@ class ShowAzimuthTool:
             self.m2 = None            
             
             # Create actions 
-            self.act_show_azimuth = QAction(QIcon(":/plugins/cadtools/icons/showazimuth.png"),  "Show Azimuth",  self.iface.mainWindow())
-            self.act_s2v= QAction(QIcon(":/plugins/cadtools/icons/select2vertex.png"),  "Select 2 Vertex Points",  self.iface.mainWindow())
+            self.act_show_azimuth = QAction(QIcon(":/plugins/cadtools/icons/showazimuth.png"), QCoreApplication.translate("ctools", "Show Azimuth"),  self.iface.mainWindow())
+            self.act_s2v= QAction(QIcon(":/plugins/cadtools/icons/select2vertex.png"), QCoreApplication.translate("ctools", "Select 2 Vertex Points"),  self.iface.mainWindow())
             self.act_s2v.setCheckable(True)     
                  
             # Connect to signals for button behaviour      
@@ -61,7 +61,7 @@ class ShowAzimuthTool:
     
         def showDialog(self):
             if self.p1 == None or self.p2 == None:
-                QMessageBox.information(None,  "Cancel",  "Not enough vertex selected.")
+                QMessageBox.information(None, QCoreApplication.translate("ctools", "Cancel"), QCoreApplication.translate("ctools", "Not enough vertex selected."))
             else:
                 az = Azimuth.calculate(self.p1,  self.p2)
                 

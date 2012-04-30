@@ -1,3 +1,11 @@
+Version 0.5.7 (2012-05-01):
+---------------------------
+* Internationalization support
+
+Version 0.5.6 (2012-02-19):
+---------------------------
+* Horizontal and vertical digitizer added.
+
 Version 0.5.5 (2011-12-21):
 ---------------------------
 * Orthogonal digitizer: when closing the polygon it will move the last point instead the first one.

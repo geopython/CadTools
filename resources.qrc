@@ -21,8 +21,11 @@
         <file>icons/arcintersectionpoint.png</file>
     </qresource>        
     <qresource prefix="/plugins/cadtools" >
-        <file>icons/ortho.png</file>
+        <file>icons/ortho2.png</file>
     </qresource>   
+    <qresource prefix="/plugins/cadtools" >
+        <file>icons/hvdigitizer.png</file>
+    </qresource>       
     <qresource prefix="/plugins/cadtools" >
         <file>icons/orthopointandline.png</file>
     </qresource>    

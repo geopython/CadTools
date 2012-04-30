@@ -8,66 +8,60 @@ from qgis.core import *
 from cadtools import resources
 
 #Import own classes and tools
-from circulararcdigitizer import CircularArcDigitizer
+from horizontalverticaldigitizer import HorizontalVerticalDigitizer
 
-class CircularArcDigitizerTool():
+class HorizontalVerticalDigitizerTool():
     
         def __init__(self, iface,  toolBar):
-            # Save reference to the QGIS interface
             self.iface = iface
             self.canvas = self.iface.mapCanvas()
             mc = self.canvas
             self.tool = None
             
-            # Create actions 
-            self.action_capturecirculararc = QAction(QIcon(":/plugins/cadtools/icons/capturecirculararc.png"), QCoreApplication.translate("ctools", "Capture Circular Arc Lines/Polygons"),  self.iface.mainWindow())
-            self.action_capturecirculararc.setEnabled(False)
-            self.action_capturecirculararc.setCheckable(True)            
+            self.act_horivert = QAction(QIcon(":/plugins/cadtools/icons/hvdigitizer.png"), QCoreApplication.translate("ctools", "Capture Vertical/Horizontal Lines/Polygons"),  self.iface.mainWindow())
+            self.act_horivert.setEnabled(False)
+            self.act_horivert.setCheckable(True)            
             
-            # Connect to signals for button behaviour
-            QObject.connect(self.action_capturecirculararc,  SIGNAL("triggered()"),  self.orthodigitize)
+            QObject.connect(self.act_horivert,  SIGNAL("triggered()"),  self.hvdigitize)
             QObject.connect(self.iface, SIGNAL("currentLayerChanged(QgsMapLayer*)"), self.toggle)
             QObject.connect(mc, SIGNAL("mapToolSet(QgsMapTool*)"), self.deactivate)         
             
-            # Add actions to the toolbar
             toolBar.addSeparator()
-            toolBar.addAction(self.action_capturecirculararc)
-                        
-            # Get the tool
-            self.tool = CircularArcDigitizer(self.canvas)
-                        
-         
-        def orthodigitize(self):
+            toolBar.addAction(self.act_horivert)
+
+            self.tool = HorizontalVerticalDigitizer(self.canvas)
+            
+
+        def hvdigitize(self):
             mc = self.canvas
             layer = mc.currentLayer()
             
-            # Set OrthogonalTool as current tool
             mc.setMapTool(self.tool)
-            self.action_capturecirculararc.setChecked(True)    
-                
-                
+            self.act_horivert.setChecked(True)    
+
+
         def toggle(self):
             mc = self.canvas
             layer = mc.currentLayer()
             
-            #Decide whether the plugin button/menu is enabled or disabled.
+            #Decide whether the plugin button/menu is enabled or disabled
             if layer <> None:
-                # Only for vector layers.
+                # Only for vector layers
                 type = layer.type()
                 if type == 0:
                     gtype = layer.geometryType()
-                    # Doesn't make sense for points.
+                    # Doesn't make sense for Points
                     if gtype <> 0:
                         if layer.isEditable():
-                            self.action_capturecirculararc.setEnabled(True)
+                            self.act_horivert.setEnabled(True)
                             QObject.connect(layer,SIGNAL("editingStopped()"),self.toggle)
                             QObject.disconnect(layer,SIGNAL("editingStarted()"),self.toggle)
                         else:
-                            self.action_capturecirculararc.setEnabled(False)
+                            self.act_horivert.setEnabled(False)
                             QObject.connect(layer,SIGNAL("editingStarted()"),self.toggle)
                             QObject.disconnect(layer,SIGNAL("editingStopped()"),self.toggle)                   
-                
-                
+
+
         def deactivate(self):
-            self.action_capturecirculararc.setChecked(False)
+            self.act_horivert.setChecked(False)
             #QObject.disconnect(self.tool, SIGNAL("segmentsFound(PyQt_PyObject)"), self.storeSegmentPoints)                  

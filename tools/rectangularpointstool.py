@@ -27,8 +27,8 @@ class RectangularPointsTool():
             self.p2 = None
                 
             # Create actions 
-            self.act_rectpoints = QAction(QIcon(":/plugins/cadtools/icons/orthopoint.png"),  "Rectangular Points",  self.iface.mainWindow())
-            self.act_selectlinesegment= QAction(QIcon(":/plugins/cadtools/icons/select1line_v2.png"),  "Select Line Segments",  self.iface.mainWindow())
+            self.act_rectpoints = QAction(QIcon(":/plugins/cadtools/icons/orthopoint.png"), QCoreApplication.translate("ctools", "Rectangular Points"),  self.iface.mainWindow())
+            self.act_selectlinesegment= QAction(QIcon(":/plugins/cadtools/icons/select1line_v2.png"), QCoreApplication.translate("ctools", "Select Line Segments"),  self.iface.mainWindow())
             self.act_selectlinesegment.setCheckable(True)            
             
             # Connect to signals for button behaviour
@@ -46,7 +46,7 @@ class RectangularPointsTool():
             
         def showDialog(self):
             if self.p1 == None or self.p2 == None:
-                QMessageBox.information(None,  "Cancel",  "No segment selected.")
+                QMessageBox.information(None, QCoreApplication.translate("ctools", "Cancel"), QCoreApplication.translate("ctools", "No segment selected."))
             else:
                 flags = Qt.WindowTitleHint | Qt.WindowSystemMenuHint | Qt.WindowMaximizeButtonHint 
                 self.ctrl = RectangularPointsGui(self.iface.mainWindow(),  flags)
