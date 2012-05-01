@@ -1,3 +1,7 @@
+Version 0.5.8 (2012-05-02):
+---------------------------
+* QgsMessageLog unsupported on older versions.
+
 Version 0.5.7 (2012-05-01):
 ---------------------------
 * Internationalization support

@@ -43,7 +43,6 @@ class CadTools:
     
         if QFileInfo(userPluginPath).exists():
           pluginPath = userPluginPath+"/i18n/cadtools_"+myLocale+".qm"
-          QgsMessageLog.logMessage(str(pluginPath),  'cadtools')
         elif QFileInfo(systemPluginPath).exists():
           pluginPath = systemPluginPath+"/i18n/cadtools_"+myLocale+".qm"
 
