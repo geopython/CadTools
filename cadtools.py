@@ -38,9 +38,7 @@ class CadTools:
         systemPluginPath = QgsApplication.prefixPath()+"/share/qgis/python/plugins/cadtools"
         locale = QSettings().value("locale/userLocale").toString()
         myLocale = locale[0:2]       
-        
-        QgsMessageLog.logMessage(str(myLocale),  'cadtools')
-    
+            
         if QFileInfo(userPluginPath).exists():
           pluginPath = userPluginPath+"/i18n/cadtools_"+myLocale+".qm"
         elif QFileInfo(systemPluginPath).exists():
