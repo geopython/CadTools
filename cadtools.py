@@ -36,7 +36,7 @@ class CadTools:
         # Initialise the translation environment.
         userPluginPath = QFileInfo(QgsApplication.qgisUserDbFilePath()).path()+"/python/plugins/cadtools"  
         systemPluginPath = QgsApplication.prefixPath()+"/share/qgis/python/plugins/cadtools"
-        locale = QSettings().value("locale/userLocale").toString()
+        locale = QSettings().value("locale/userLocale")
         myLocale = locale[0:2]       
             
         if QFileInfo(userPluginPath).exists():
