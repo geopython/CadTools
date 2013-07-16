@@ -14,7 +14,7 @@ class CadToolsAboutGui(QDialog, QObject, Ui_CadToolsAbout):
         self.setupUi(self)
         QObject.connect(self.btnWeb, SIGNAL("clicked()"), self.openWeb)
         QObject.connect(self.btnHelp, SIGNAL("clicked()"), self.openHelp)
-        self.lblVersion.setText("CadTools 0.5.5")
+        self.lblVersion.setText("CadTools 0.6.0dev")
         self.txtAbout.setText(self.getText())    
     
     def openWeb(self):
