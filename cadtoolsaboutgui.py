@@ -18,7 +18,7 @@ class CadToolsAboutGui(QDialog, QObject, Ui_CadToolsAbout):
         self.txtAbout.setText(self.getText())    
     
     def openWeb(self):
-        webbrowser.open("http://www.catais.org/qgis/cadtools/")
+        webbrowser.open("http://plugins.qgis.org/plugins/cadtools/")
 
     def openHelp(self):
         webbrowser.open(currentPath + "/help/cadtools_help.html")    

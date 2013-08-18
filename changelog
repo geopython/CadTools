@@ -1,3 +1,7 @@
+Version 0.6.0 (2013-08-18):
+---------------------------
+* Ported plugin to QGIS 2.0 API
+
 Version 0.5.9 (2012-05-02):
 ---------------------------
 * QgsMessageLog unsupported on older versions... ...again
