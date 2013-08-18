@@ -8,10 +8,10 @@ def description():
     return QCoreApplication.translate("init", "Some tools to perform cad like functions.")
 
 def version():
-    return "0.6.0dev"
+    return "0.6.0"
 
 def qgisMinimumVersion():
-    return "1.3"
+    return "2.0"
 	
 def qgisMaximumVersion():
     return "2.99"

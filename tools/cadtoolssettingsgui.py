@@ -20,17 +20,17 @@ class CadToolsSettingsGui(QDialog, Ui_CadToolsSettings):
         self.spinBoxFeaturePitch.setMinimum(0.1)
         self.spinBoxFeaturePitch.setMaximum(1000)
         self.spinBoxFeaturePitch.setDecimals(1)
-        self.spinBoxFeaturePitch.setValue(self.featurePitch.toDouble()[0])
+        self.spinBoxFeaturePitch.setValue(float(self.featurePitch))
         
         self.spinBoxFeatureAngle.setMinimum(1)
         self.spinBoxFeatureAngle.setMaximum(90)
         self.spinBoxFeatureAngle.setDecimals(1)    
-        self.spinBoxFeatureAngle.setValue(self.featureAngle.toDouble()[0])    
+        self.spinBoxFeatureAngle.setValue(float(self.featureAngle))    
         
         self.spinBoxRubberAngle.setMinimum(1)
         self.spinBoxRubberAngle.setMaximum(90)
         self.spinBoxRubberAngle.setDecimals(1)    
-        self.spinBoxRubberAngle.setValue(self.rubberAngle.toDouble()[0])          
+        self.spinBoxRubberAngle.setValue(float(self.rubberAngle))          
       
         if self.featureMethod == "pitch":
             self.radioFeaturePitch.setChecked(True)

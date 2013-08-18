@@ -118,7 +118,7 @@ class VertexAndSegmentFinderTool(QgsMapTool):
     #get the setting for displaySnapWarning
     settings = QSettings()
     settingsLabel = "/UI/displaySnapWarning"
-    displaySnapWarning = settings.value(settingsLabel).toBool()
+    displaySnapWarning = bool(settings.value(settingsLabel))
     
     #only show the warning if the setting is true
     if displaySnapWarning:    
