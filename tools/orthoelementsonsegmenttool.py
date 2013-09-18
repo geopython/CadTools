@@ -32,9 +32,9 @@ class OrthoElementsOnSegmentTool:
             self.act_selectvertexandline.setCheckable(True)   
       
             # Connect to signals for button behaviour      
-            QObject.connect(self.act_ortholineandpoint,  SIGNAL("triggered()"),  self.ortholineandpoint)
-            QObject.connect(self.act_selectvertexandline,  SIGNAL("triggered()"),  self.selectvertexandline)
-            QObject.connect(self.canvas, SIGNAL("mapToolSet(QgsMapTool*)"), self.deactivate)
+            self.act_ortholineandpoint.triggered.connect(self.ortholineandpoint)
+            self.act_selectvertexandline.triggered.connect(self.selectvertexandline)
+            self.canvas.mapToolSet.connect(self.deactivate)
 
             toolBar.addSeparator()
             toolBar.addAction(self.act_selectvertexandline)
@@ -52,7 +52,7 @@ class OrthoElementsOnSegmentTool:
             self.act_selectvertexandline.setChecked(True)                    
             
             #Connect to the VertexAndSegmentFinderTool
-            QObject.connect(self.tool, SIGNAL("vertexFound(PyQt_PyObject)"), self.storeVertex)
+            self.tool.vertexFound.connect(self.storeVertex)
 
 
         def ortholineandpoint(self):

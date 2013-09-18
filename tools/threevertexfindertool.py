@@ -8,6 +8,9 @@ from qgis.gui import *
 
 # Vertex Finder Tool class
 class ThreeVertexFinderTool(QgsMapTool):
+
+  vertexFound = pyqtSignal(object)
+
   def __init__(self, canvas):
     QgsMapTool.__init__(self,canvas)
     self.canvas = canvas
@@ -112,7 +115,7 @@ class ThreeVertexFinderTool(QgsMapTool):
 
             self.count = self.count + 1            
             
-            self.emit(SIGNAL("vertexFound(PyQt_PyObject)"), [self.p1, self.p2,  self.p3])
+            self.vertexFound.emit([self.p1, self.p2,  self.p3])
 
         elif self.count % 3 == 0:
             
@@ -128,7 +131,7 @@ class ThreeVertexFinderTool(QgsMapTool):
             if self.count > 300:
                 self.count = 4
 
-            self.emit(SIGNAL("vertexFound(PyQt_PyObject)"), [self.p1, self.p2,  self.p3])
+            self.vertexFound.emit([self.p1, self.p2,  self.p3])
 
 
         elif self.count > 3 and self.count % 3 != 0:
@@ -143,7 +146,7 @@ class ThreeVertexFinderTool(QgsMapTool):
             
             self.count = self.count + 1              
             
-            self.emit(SIGNAL("vertexFound(PyQt_PyObject)"), [self.p1, self.p2,  self.p3])
+            self.vertexFound.emit([self.p1, self.p2,  self.p3])
 
     else:
         #warn about missing snapping tolerance if appropriate

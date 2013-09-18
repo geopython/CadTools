@@ -7,7 +7,11 @@ from ui_arcintersection import Ui_ArcIntersection
 
 class ArcIntersectionGui(QDialog, QObject, Ui_ArcIntersection):
     MSG_BOX_TITLE = "Arc Intersection"
-    
+
+    distancesFromPoints = pyqtSignal(float,float)
+    closeArcIntersectionGui = pyqtSignal()
+    unsetTool = pyqtSignal()
+
     def __init__(self, parent,  fl):
         QDialog.__init__(self, parent,  fl)
         self.setupUi(self)
@@ -21,11 +25,11 @@ class ArcIntersectionGui(QDialog, QObject, Ui_ArcIntersection):
         
     @pyqtSignature("on_btnOK_clicked()")    
     def on_btnOK_clicked(self):
-        self.emit(SIGNAL("distancesFromPoints(double, double)"),  self.sboxPnt1.value(),  self.sboxPnt2.value())        
+        self.distancesFromPoints.emit(self.sboxPnt1.value(),self.sboxPnt2.value())
         self.close()
         
     @pyqtSignature("on_btnCancel_clicked()")    
     def on_btnCancel_clicked(self): 
-        self.emit(SIGNAL("closeArcIntersectionGui()"))  
-        self.emit(SIGNAL("unsetTool()")) 
+        self.closeArcIntersectionGui.emit()
+        self.unsetTool.emit()
         self.close()

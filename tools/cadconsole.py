@@ -67,7 +67,7 @@ class CadPythonEdit(QTextEdit):
 ##
     self.displayPrompt(False)
 
-    self.history = QStringList()
+    self.history = []
     self.historyIndex = 0
 
     self.high = ConsoleHighlighter(self)
@@ -88,10 +88,10 @@ class CadPythonEdit(QTextEdit):
   def currentCommand(self):
     block = self.cursor.block()
     text = block.text()
-    return text.right(text.length()-self.currentPromptLength)
+    return text[self.currentPromptLength:]
 
   def showPrevious(self):
-        if self.historyIndex < len(self.history) and not self.history.isEmpty():
+        if self.historyIndex < len(self.history) and self.history:
             self.cursor.movePosition(QTextCursor.EndOfBlock, QTextCursor.MoveAnchor)
             self.cursor.movePosition(QTextCursor.StartOfBlock, QTextCursor.KeepAnchor)
             self.cursor.removeSelectedText()
@@ -103,7 +103,7 @@ class CadPythonEdit(QTextEdit):
                 self.insertPlainText(self.history[self.historyIndex])
                 
   def showNext(self):
-        if  self.historyIndex > 0 and not self.history.isEmpty():
+        if  self.historyIndex > 0 and self.history:
             self.cursor.movePosition(QTextCursor.EndOfBlock, QTextCursor.MoveAnchor)
             self.cursor.movePosition(QTextCursor.StartOfBlock, QTextCursor.KeepAnchor)
             self.cursor.removeSelectedText()
@@ -115,7 +115,7 @@ class CadPythonEdit(QTextEdit):
                 self.insertPlainText(self.history[self.historyIndex])
 
   def updateHistory(self, command):
-        if isinstance(command, QStringList):
+        if isinstance(command, list):
             for line in command:
                 self.history.append(line)
         elif not command == "":
@@ -182,7 +182,7 @@ class CadPythonEdit(QTextEdit):
 ##        self.cursor.movePosition(QTextCursor.End, QTextCursor.MoveAnchor, 1)
 ##        self.setTextCursor(self.cursor)
 ##        if source.hasText():
-##            pasteList = QStringList()
+##            pasteList = []
 ##            pasteList = source.text().split("\n")
 ##            for line in pasteList:
 ##		self.insertPlainText(line)
@@ -292,7 +292,7 @@ class ConsoleHighlighter(QSyntaxHighlighter):
       self.f[tag].setForeground(color)
 
   def highlightBlock(self, txt):
-    size = txt.length()
+    size = len(txt)
     state = self.currentBlockState()
     if state == self.OUTPUT or state == self.ERROR or state == self.INIT:
       self.setFormat(0,size, self.f[state])

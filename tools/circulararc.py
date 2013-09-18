@@ -24,22 +24,22 @@ class CircularArc:
         
         px = ptArc.x() 
         py = ptArc.y()
-        r = ( ( cx-px ) * ( cx-px ) + ( cy-py ) * ( cy-py ) ) ** 0.5;      
+        r = ( ( cx-px ) * ( cx-px ) + ( cy-py ) * ( cy-py ) ) ** 0.5
 
         ## If the method is "pitch" (=Pfeilhöhe) then
         ## we need to calculate the corresponding
         ## angle.
         if method == "pitch":
-            myAlpha = 2.0 * math.acos( 1.0 - ( interValue / 1000 ) / r );
+            myAlpha = 2.0 * math.acos( 1.0 - ( interValue / 1000 ) / r )
             arcIncr = myAlpha
 #            print "myAlpha: " + str(myAlpha)
         else:
             arcIncr = interValue * math.pi / 180
 #            print "arcIncr:  " + str(arcIncr)
 
-        a1 = math.atan2( ptStart.y() - center.y(), ptStart.x() - center.x() );
-        a2 = math.atan2( ptArc.y() - center.y(), ptArc.x() - center.x() );
-        a3 = math.atan2( ptEnd.y() - center.y(), ptEnd.x() - center.x() );
+        a1 = math.atan2( ptStart.y() - center.y(), ptStart.x() - center.x() )
+        a2 = math.atan2( ptArc.y() - center.y(), ptArc.x() - center.x() )
+        a3 = math.atan2( ptEnd.y() - center.y(), ptEnd.x() - center.x() )
 
         # Clockwise
         if a1 > a2 and a2 > a3:

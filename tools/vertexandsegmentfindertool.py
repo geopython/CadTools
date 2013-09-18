@@ -8,6 +8,9 @@ from qgis.gui import *
 
 # Vertex Finder Tool class
 class VertexAndSegmentFinderTool(QgsMapTool):
+
+  vertexAndSegmentFound = pyqtSignal(object)
+
   def __init__(self, canvas):
     QgsMapTool.__init__(self,canvas)
     self.canvas=canvas
@@ -16,7 +19,7 @@ class VertexAndSegmentFinderTool(QgsMapTool):
     # A marker for the vertex point and a rubberband for the linesegment
     self.m1 = None #QgsVertexMarker(self.canvas)
     self.p1 = QgsPoint()
-    self.rb1 = QgsRubberBand(self.canvas,  False)
+    self.rb1 = QgsRubberBand(self.canvas)
     #our own fancy cursor
     self.cursor = QCursor(QPixmap(["16 16 3 1",
                                   "      c None",
@@ -69,7 +72,7 @@ class VertexAndSegmentFinderTool(QgsMapTool):
       if self.count == 0:
         (retval,result) = snapper.snapToCurrentLayer(startingPoint,QgsSnapper.SnapToVertex)
       else:
-       (retval,result) = snapper.snapToBackgroundLayers(startingPoint)
+        (retval,result) = snapper.snapToBackgroundLayers(startingPoint)
                        
       #so if we have found a vertex
       if result <> []:
@@ -109,7 +112,7 @@ class VertexAndSegmentFinderTool(QgsMapTool):
             
                 self.count = 0
         
-                self.emit(SIGNAL("vertexAndSegmentFound(PyQt_PyObject)"), [self.p1, self.rb1.getPoint(0,0), self.rb1.getPoint(0,2)])
+                self.vertexAndSegmentFound.emit([self.p1, self.rb1.getPoint(0,0), self.rb1.getPoint(0,2)])
       else:
         #warn about missing snapping tolerance if appropriate
         self.showSettingsWarning()
@@ -139,7 +142,7 @@ class VertexAndSegmentFinderTool(QgsMapTool):
     self.m1 = None 
     # Reset the rubberband
     self.rb1.reset()
-    self.count = 0 
+    self.count = 0                    s
     pass
 
   def isZoomTool(self):

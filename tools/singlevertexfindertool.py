@@ -8,6 +8,9 @@ from qgis.gui import *
 
 # Vertex Finder Tool class
 class SingleVertexFinderTool(QgsMapTool):
+
+  singleVertexFound = pyqtSignal(object)
+
   def __init__(self, canvas):
     QgsMapTool.__init__(self,canvas)
     self.canvas=canvas
@@ -80,7 +83,7 @@ class SingleVertexFinderTool(QgsMapTool):
         self.m1.setPenWidth (3)            
         self.m1.setCenter(self.p1)
 
-        self.emit(SIGNAL("singleVertexFound(PyQt_PyObject)"), [self.p1, self.m1])
+        self.singleVertexFound.emit([self.p1, self.m1])
       else:
         #warn about missing snapping tolerance if appropriate
         self.showSettingsWarning()

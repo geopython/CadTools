@@ -5,6 +5,8 @@ from PyQt4.QtGui import *
 from qgis.core import *
 from qgis.gui import *
 import math
+import re
+
 
 def addGeometryToCadLayer(g):
     pointName = "CadLayer Points"
@@ -188,3 +190,6 @@ def rotatePoint(point,  angle):
     x = math.cos(angle)*point.x() - math.sin(angle)*point.y()
     y = math.sin(angle)*point.x() + math.cos(angle)*point.y()
     return QgsPoint(x,  y)
+
+def authidToCrs(authid):
+    return long(re.sub('^.*:','',authid))

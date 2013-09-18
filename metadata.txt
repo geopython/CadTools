@@ -13,7 +13,7 @@ name=CadTools
 qgisMinimumVersion=2.0
 qgisMaximumVersion=2.99
 description=Some tools to perform cad like functions in QGIS
-version=0.6.0
+version=0.6.1
 
 # end of mandatory metadata
 
@@ -30,7 +30,7 @@ tracker=https://github.com/geopython/CadTools/issues
 repository=https://github.com/geopython/CadTools
 icon=icons/orthopoint.png
 # experimental flag
-experimental=True
+experimental=False
 
 # deprecated flag (applies to the whole plugin, not just a single version
 deprecated=False

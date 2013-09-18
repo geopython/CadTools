@@ -27,7 +27,7 @@ class ParallelLineTool:
             self.p1 = None
             self.p2 = None
             self.m1 = None
-            self.rb1 = QgsRubberBand(self.canvas,  False)
+            self.rb1 = QgsRubberBand(self.canvas)
             
             self.pv = None
             self.dummy = False
@@ -38,9 +38,9 @@ class ParallelLineTool:
             self.action_selectline.setCheckable(True)      
       
             # Connect to signals for button behaviour      
-            QObject.connect(self.action_selectline,  SIGNAL("triggered()"),  self.selectLineSegment)
-            QObject.connect(self.action_parallelline,   SIGNAL("triggered()"),  self.showDialog)
-            QObject.connect(self.canvas, SIGNAL("mapToolSet(QgsMapTool*)"), self.deactivate)
+            self.action_selectline.triggered.connect(self.selectLineSegment)
+            self.action_parallelline.triggered.connect(self.showDialog)
+            self.canvas.mapToolSet.connect(self.deactivate)
 
             toolBar.addSeparator()
             toolBar.addAction(self.action_selectline)
@@ -57,7 +57,7 @@ class ParallelLineTool:
             self.action_selectline.setChecked(True)      
 
             # Connect to the SingleSegmentFinderTool
-            QObject.connect(self.tool, SIGNAL("segmentFound(PyQt_PyObject)"), self.storeSegmentPoints)
+            self.tool.segmentFound.connect(self.storeSegmentPoints)
 
         def storeSegmentPoints(self,  result):
             if result[0].x() < result[1].x():
@@ -85,9 +85,9 @@ class ParallelLineTool:
                 self.ctrl.initGui()
                 self.ctrl.show()
                 
-                QObject.connect(self.ctrl, SIGNAL("okClicked(QString, double)"), self.createParallelLine)
-                QObject.connect( self.ctrl,  SIGNAL("btnSelectVertex_clicked()"),  self.selectVertex )
-                QObject.connect( self.ctrl, SIGNAL("unsetTool()"), self.unsetTool )
+                self.ctrl.okClicked.connect(self.createParallelLine)
+                self.ctrl.btnSelectVertex_clicked.connect(self.selectVertex)
+                self.ctrl.unsetTool.connect(self.unsetTool)
                 
                 
         def selectVertex(self):            
@@ -104,7 +104,7 @@ class ParallelLineTool:
             self.tool = SingleVertexFinderTool(mc)   
             mc.setMapTool(self.tool)
             
-            QObject.connect(self.tool, SIGNAL("singleVertexFound(PyQt_PyObject)"), self.storeVertexPoint)
+            self.tool.singleVertexFound.connect(self.storeVertexPoint)
             
             self.p1 = p1
             self.p2 = p2            

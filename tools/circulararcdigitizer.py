@@ -7,13 +7,14 @@ from qgis.gui import *
 import math
 
 from circulararc import CircularArc
+import cadutils
 
 
 class CircularArcDigitizer(QgsMapTool):
     def __init__(self, canvas):
         QgsMapTool.__init__(self,canvas)
         self.canvas=canvas
-        self.rb = QgsRubberBand(self.canvas,  True)
+        self.rb = QgsRubberBand(self.canvas,  QGis.Polygon)
         self.mCtrl = False
         self.count = 0
         
@@ -64,8 +65,8 @@ class CircularArcDigitizer(QgsMapTool):
  
  
     def canvasPressEvent(self,event):
-        color = QColor(255,0,0)
-        self.rb.setColor(color) 
+        color = QColor(255,0,0,100)
+        self.rb.setColor(color)
         self.rb.setWidth(1)      
         
         x = event.pos().x()
@@ -115,11 +116,11 @@ class CircularArcDigitizer(QgsMapTool):
                     settings = QSettings("CatAIS","cadtools")
                     method = settings.value("arcs/featuremethod",  "pitch")
                     if method == "pitch":
-                        value = settings.value("arcs/featurepitch",  2)
+                        value = settings.value("arcs/featurepitch",  2, type=float)
                     else:
-                        value = settings.value("arcs/featureangle",  1)
+                        value = settings.value("arcs/featureangle",  1, type=float)
 
-                    g = CircularArc.getInterpolatedArc(self.ptStart,  self.ptArc,  self.ptEnd,  method.toString(),  value.toDouble()[0])
+                    g = CircularArc.getInterpolatedArc(self.ptStart,  self.ptArc,  self.ptEnd,  method,  value)
                     ptList = g.asPolyline()
                     
                     ## Add the segmentation points to the rubberband.
@@ -135,20 +136,21 @@ class CircularArcDigitizer(QgsMapTool):
     def createFeature(self):
         layer = self.canvas.currentLayer() 
         provider = layer.dataProvider()
-        f = QgsFeature()
+        fields = layer.pendingFields()
+        f = QgsFeature(fields)
             
         coords = []
         [coords.append(self.rb.getPoint(0, i)) for i in range(self.rb.numberOfVertices())]
         
         ## On the Fly reprojection.
-        layerEPSG = layer.srs().epsg()
-        projectEPSG = self.canvas.mapRenderer().destinationSrs().epsg()
+        layerEPSG = cadutils.authidToCrs(layer.crs().authid())
+        projectEPSG = cadutils.authidToCrs(self.canvas.mapRenderer().destinationCrs().authid())
         
         if layerEPSG != projectEPSG:
             coords_tmp = coords[:]
             coords = []
             for point in coords_tmp:
-                transformedPoint = self.canvas.mapRenderer().mapToLayerCoordinates( layer, point );
+                transformedPoint = self.canvas.mapRenderer().mapToLayerCoordinates( layer, point )
                 coords.append(transformedPoint)
               
         ## Add geometry to feature.
@@ -159,10 +161,10 @@ class CircularArcDigitizer(QgsMapTool):
         f.setGeometry(g)
             
         ## Add attributefields to feature.
-        fields = layer.pendingFields()
-        for i in fields:
-            f.addAttribute(i,  provider.defaultValue(i))
-                
+        for field in fields.toList():
+            ix = fields.indexFromName(field.name())
+            f[field.name()] = provider.defaultValue(ix)
+
         layer.beginEditCommand("Feature added")
         layer.addFeature(f)
         layer.endEditCommand()
@@ -170,10 +172,11 @@ class CircularArcDigitizer(QgsMapTool):
         # reset rubberband and refresh the canvas
         if self.type == 1:
             self.isPolygon = False
+            self.rb.reset()
         else:
             self.isPolygon = True
-            
-        self.rb.reset(self.isPolygon)
+            self.rb.reset(QGis.Polygon)
+
         self.canvas.refresh()
         
   
@@ -220,13 +223,14 @@ class CircularArcDigitizer(QgsMapTool):
         self.isPolygon = True
         if self.type == 1:
             self.isPolygon = False
+            self.rb.reset()
         else:
             self.isPolygon = True
-        self.rb.reset(self.isPolygon)
+            self.rb.reset(QGis.Polygon)
 
 
     def deactivate(self):
-        self.rb.reset(True)
+        self.rb.reset(QGis.Polygon)
         self.count = 0
         pass
 

@@ -7,13 +7,14 @@ from qgis.gui import *
 import math
 
 from lineintersection import LineIntersection
+import cadutils
 
 # Orthogonal Tool class
 class OrthogonalDigitizer(QgsMapTool):
   def __init__(self, canvas):
     QgsMapTool.__init__(self,canvas)
     self.canvas=canvas
-    self.rb = QgsRubberBand(self.canvas,  True)
+    self.rb = QgsRubberBand(self.canvas, QGis.Polygon)
     self.mCtrl = False
     self.length = -1
     #our own fancy cursor
@@ -59,9 +60,9 @@ class OrthogonalDigitizer(QgsMapTool):
  
  
   def canvasPressEvent(self,event):
-    color = QColor(255,0,0)
+    color = QColor(255,0,0,100)
     self.rb.setColor(color) 
-    self.rb.setWidth(1)      
+    self.rb.setWidth(1)
     
     x = event.pos().x()
     y = event.pos().y()
@@ -92,45 +93,45 @@ class OrthogonalDigitizer(QgsMapTool):
      
     layer = self.canvas.currentLayer() 
     provider = layer.dataProvider()
-    f = QgsFeature()
+    fields = layer.pendingFields()
+    f = QgsFeature(fields)
 
-    if self.isPolygon == True:
-        if self.mCtrl == True:
-            # we will move the first point to close the polygon square... (square??)
-            # NO: move the last point!
-        
-            # the last segment 
+    if self.isPolygon and self.mCtrl and self.rb.numberOfVertices() > 3:
+        # we will move the first point to close the polygon square... (square??)
+        # NO: move the last point!
+
+        # the last segment
 #            pn = self.rb.getPoint(0,  self.rb.numberOfVertices()-2)
 #            pm = self.rb.getPoint(0,  self.rb.numberOfVertices()-1)
-            pn = self.rb.getPoint(0,  self.rb.numberOfVertices()-2)
-            pm = self.rb.getPoint(0,  self.rb.numberOfVertices()-1)
-            
-            p1 = self.rb.getPoint(0, 0)
-            p2 = self.rb.getPoint(0, 1)
+        pn = self.rb.getPoint(0,  self.rb.numberOfVertices()-2)
+        pm = self.rb.getPoint(0,  self.rb.numberOfVertices()-1)
 
-            # but we need a line segment that is orthogonal to the last segment
-            # der letzte Punkt ist der Aufpunkt
-            # der Richtungsvektor ist der Vektor, der rechwinklig zum Differenzvektor pn-pm liegt (-> x/y vertauschen)
-            d = ( (pn.x()-pm.x())**2 + (pn.y()-pm.y())**2 )**0.5
-            xp = p1.x() + (p1.y()-p2.y()) 
-            yp = p1.y() - (p1.x()-p2.x())  
-            pp = QgsPoint(xp,  yp)
-        
-            p0 = LineIntersection.intersectionPoint(pn, pm, p1, pp)
-            self.rb.movePoint(self.rb.numberOfVertices()-1, p0, 0)
+        p1 = self.rb.getPoint(0, 0)
+        p2 = self.rb.getPoint(0, 1)
+
+        # but we need a line segment that is orthogonal to the last segment
+        # der letzte Punkt ist der Aufpunkt
+        # der Richtungsvektor ist der Vektor, der rechwinklig zum Differenzvektor pn-pm liegt (-> x/y vertauschen)
+        d = ( (pn.x()-pm.x())**2 + (pn.y()-pm.y())**2 )**0.5
+        xp = p1.x() + (p1.y()-p2.y())
+        yp = p1.y() - (p1.x()-p2.x())
+        pp = QgsPoint(xp,  yp)
+
+        p0 = LineIntersection.intersectionPoint(pn, pm, p1, pp)
+        self.rb.movePoint(self.rb.numberOfVertices()-1, p0, 0)
         
     coords = []
     [coords.append(self.rb.getPoint(0, i)) for i in range(self.rb.numberOfVertices())]
     
     ## On the Fly reprojection.
-    layerEPSG = layer.srs().epsg()
-    projectEPSG = self.canvas.mapRenderer().destinationSrs().epsg()
+    layerEPSG = cadutils.authidToCrs(layer.crs().authid())
+    projectEPSG = cadutils.authidToCrs(self.canvas.mapRenderer().destinationCrs().authid())
     
     if layerEPSG != projectEPSG:
         coords_tmp = coords[:]
         coords = []
         for point in coords_tmp:
-            transformedPoint = self.canvas.mapRenderer().mapToLayerCoordinates( layer, point );
+            transformedPoint = self.canvas.mapRenderer().mapToLayerCoordinates( layer, point )
             coords.append(transformedPoint)
           
     ## Add geometry to feature.
@@ -141,10 +142,10 @@ class OrthogonalDigitizer(QgsMapTool):
     f.setGeometry(g)
         
     ## Add attributefields to feature.
-    fields = layer.pendingFields()
-    for i in fields:
-        f.addAttribute(i,  provider.defaultValue(i))
-            
+    for field in fields.toList():
+        ix = fields.indexFromName(field.name())
+        f[field.name()] = provider.defaultValue(ix)
+
     layer.beginEditCommand("Feature added")
     layer.addFeature(f)
     layer.endEditCommand()
@@ -152,10 +153,11 @@ class OrthogonalDigitizer(QgsMapTool):
     # reset rubberband and refresh the canvas
     if self.type == 1:
         self.isPolygon = False
+        self.rb.reset()
     else:
         self.isPolygon = True
+        self.rb.reset(QGis.Polygon)
         
-    self.rb.reset(self.isPolygon)
     self.canvas.refresh()
         
 
@@ -356,13 +358,13 @@ class OrthogonalDigitizer(QgsMapTool):
     self.isPolygon = True
     if self.type == 1:
         self.isPolygon = False
+        self.rb.reset()
     else:
         self.isPolygon = True
+        self.rb.reset(QGis.Polygon)
         
-    self.rb.reset(self.isPolygon)
-
   def deactivate(self):
-    self.rb.reset(True)
+    self.rb.reset(QGis.Polygon)
     self.count = 0
     pass
 

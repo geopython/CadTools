@@ -12,8 +12,8 @@ class CadToolsAboutGui(QDialog, QObject, Ui_CadToolsAbout):
         QDialog.__init__(self, iface)
         self.iface = iface
         self.setupUi(self)
-        QObject.connect(self.btnWeb, SIGNAL("clicked()"), self.openWeb)
-        QObject.connect(self.btnHelp, SIGNAL("clicked()"), self.openHelp)
+        self.btnWeb.clicked.connect(self.openWeb)
+        self.btnHelp.clicked.connect(self.openHelp)
         self.lblVersion.setText("CadTools 0.6.0dev")
         self.txtAbout.setText(self.getText())    
     
@@ -30,6 +30,8 @@ CadTools provides some tools to perform CAD like functions in QGIS.
 There is some code adopted from the Numerical Vertex Edit plugin (Cédric Möri), fTools (Carson Farmer) and the Python console. Thank you!
 
 And thanks to Giuseppe Sucameli for solving the lost icons issue.
+
+Ported to QGIS 2.0 API version by Angelos Tzotsos (gcpp.kalxas@gmail.com) and Matthias Uden (matthias.uden@gmail.com)
 
 LICENSING INFORMATION:
 CadTools is copyright (C) 2009-2011  Stefan Ziegler

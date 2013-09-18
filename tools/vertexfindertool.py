@@ -8,6 +8,9 @@ from qgis.gui import *
 
 # Vertex Finder Tool class
 class VertexFinderTool(QgsMapTool):
+
+  vertexFound = pyqtSignal(object)
+
   def __init__(self, canvas):
     QgsMapTool.__init__(self,canvas)
     self.canvas=canvas
@@ -102,7 +105,7 @@ class VertexFinderTool(QgsMapTool):
             self.count = self.count + 1
             
             #tell the world about the vertex and the marker           
-            self.emit(SIGNAL("vertexFound(PyQt_PyObject)"), [self.p1, self.p2,  self.m1,  self.m2])            
+            self.vertexFound.emit([self.p1, self.p2,  self.m1,  self.m2])
         elif self.count == 2:
             
             #QMessageBox.information(None,  "Cancel",  str(self.m1))
@@ -115,7 +118,7 @@ class VertexFinderTool(QgsMapTool):
             self.p2.setY( result[0].snappedVertex.y() )  
             self.m2.setCenter(self.p2)
             #tell the world about the vertex and the marker           
-            self.emit(SIGNAL("vertexFound(PyQt_PyObject)"), [self.p1, self.p2,  self.m1,  self.m2])
+            self.vertexFound.emit([self.p1, self.p2,  self.m1,  self.m2])
       else:
         #warn about missing snapping tolerance if appropriate
         self.showSettingsWarning()

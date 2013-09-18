@@ -64,8 +64,11 @@ class ArcFinderTool(QgsMapTool):
             
             feat = QgsFeature()
             self.featId = result[0].snappedAtGeometry
-            self.layer.featureAtId(self.featId,  feat,  True,  False)
-            
+            request=QgsFeatureRequest()
+            request.setFilterFid(self.featId)
+            for f in self.layer.getFeatures(request):
+                feat = f
+
             wkbType = feat.geometry().wkbType()
             
             if wkbType == 2:
@@ -122,13 +125,13 @@ class ArcFinderTool(QgsMapTool):
             ## Create the new geometry (circular arc) for the moving rubberband and 
             ## the final feature.
             settings = QSettings("CatAIS","cadtools")
-            value = settings.value("arcs/rubberangle",  5)
+            value = settings.value("arcs/rubberangle",  5, type=float)
             if self.movingVertex == "arc":
-                g = CircularArc.getInterpolatedArc(self.ptStart,  newPoint,  self.ptEnd,  "angle",   value.toDouble()[0])                
+                g = CircularArc.getInterpolatedArc(self.ptStart,  newPoint,  self.ptEnd,  "angle",   value)
             elif self.movingVertex == "start":
-                g = CircularArc.getInterpolatedArc(newPoint,  self.ptArc,  self.ptEnd,  "angle",   value.toDouble()[0])
+                g = CircularArc.getInterpolatedArc(newPoint,  self.ptArc,  self.ptEnd,  "angle",   value)
             elif self.movingVertex == "end":
-                g = CircularArc.getInterpolatedArc(self.ptStart,  self.ptArc,  newPoint,  "angle",   value.toDouble()[0])                
+                g = CircularArc.getInterpolatedArc(self.ptStart,  self.ptArc,  newPoint,  "angle",   value)
                 
             self.rb2.setToGeometry( g, self.layer );
             
@@ -166,29 +169,28 @@ class ArcFinderTool(QgsMapTool):
             settings = QSettings("CatAIS","cadtools")
             method = settings.value("arcs/featuremethod",  "pitch")
             if method == "pitch":
-                value = settings.value("arcs/featurepitch",  2)
+                value = settings.value("arcs/featurepitch",  2, type=float)
             else:
-                value = settings.value("arcs/featureangle",  1)
+                value = settings.value("arcs/featureangle",  1, type=float)
             if self.movingVertex == "arc":
-                g = CircularArc.getInterpolatedArc(self.ptStart,  newPoint,  self.ptEnd,  method,   value.toDouble()[0])                
+                g = CircularArc.getInterpolatedArc(self.ptStart,  newPoint,  self.ptEnd,  method,   value)
             elif self.movingVertex == "start":
-                g = CircularArc.getInterpolatedArc(newPoint,  self.ptArc,  self.ptEnd,  method, value.toDouble()[0])
+                g = CircularArc.getInterpolatedArc(newPoint,  self.ptArc,  self.ptEnd,  method, value)
             elif self.movingVertex == "end":
-                g = CircularArc.getInterpolatedArc(self.ptStart,  self.ptArc,  newPoint,  method, value.toDouble()[0])    
+                g = CircularArc.getInterpolatedArc(self.ptStart,  self.ptArc,  newPoint,  method, value)
                 
             ## On the Fly reprojection of the geometry (only if needed)
-            layerEPSG = self.layer.srs().epsg()
-            projectEPSG = self.canvas.mapRenderer().destinationSrs().epsg()
+            layerEPSG = cadutils.authidToCrs(self.layer.crs().authid())
+            projectEPSG = cadutils.authidToCrs(self.canvas.mapRenderer().destinationCrs().authid())
             if layerEPSG != projectEPSG:
-                layerSRS = self.layer.srs()
-                projectSRS = self.canvas.mapRenderer().destinationSrs()
-                coordtrans = QgsCoordinateTransform(layerSRS,  projectSRS)
+                layerCrs = self.layer.crs()
+                projectCrs = self.canvas.mapRenderer().destinationCrs()
+                coordtrans = QgsCoordinateTransform(layerCrs,  projectCrs)
                 g.transform(coordtrans)
         
             self.layer.beginEditCommand("Geometry modified.")
             self.layer.changeGeometry(self.featId,  g)
             self.layer.endEditCommand()
-            self.layer.setModified(True,  True)
             self.layer.reload()
             self.canvas.refresh()
             
@@ -200,10 +202,10 @@ class ArcFinderTool(QgsMapTool):
 
 
     def createRubberBand( self,  color ):
-        rb = QgsRubberBand( self.canvas, False );
+        rb = QgsRubberBand( self.canvas )
         rb.setColor(color) 
         rb.setWidth(2)      
-        rb.show();
+        rb.show()
         return rb
 
             

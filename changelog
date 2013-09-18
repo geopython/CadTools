@@ -1,3 +1,7 @@
+Version 0.6.1 (2013-09-18):
+---------------------------
+* Further work on porting plugin to QGIS 2.0 API
+
 Version 0.6.0 (2013-08-18):
 ---------------------------
 * Ported plugin to QGIS 2.0 API

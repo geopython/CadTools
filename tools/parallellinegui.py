@@ -7,6 +7,10 @@ import os, sys
 
 class ParallelLineGui(QDialog, Ui_ParallelLine):
 
+    okClicked = pyqtSignal(str, float)
+    unsetTool = pyqtSignal()
+    btnSelectVertex_clicked = pyqtSignal()
+
     def __init__(self, parent, flags):
         QDialog.__init__(self, parent, flags)
         self.setupUi(self)
@@ -14,10 +18,10 @@ class ParallelLineGui(QDialog, Ui_ParallelLine):
         self.method = "fixed"
 
         self.okButton = self.buttonBox.button(QDialogButtonBox.Ok)
-        self.connect(self.okButton, SIGNAL("accepted()"), self.accept)
+        self.okButton.clicked.connect(self.accept)
 
         self.cancelButton = self.buttonBox.button(QDialogButtonBox.Cancel)
-        self.connect(self.cancelButton, SIGNAL("clicked()"), self.close)        
+        self.cancelButton.clicked.connect(self.close)
 
 
     def initGui(self):
@@ -54,14 +58,14 @@ class ParallelLineGui(QDialog, Ui_ParallelLine):
     def on_btnSelectVertex_clicked(self):
         self.method = "vertex"
         self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(True)   
-        self.emit( SIGNAL("btnSelectVertex_clicked()") )
+        self.btnSelectVertex_clicked.emit()
 
 
     def accept(self):
-        self.emit( SIGNAL("okClicked(QString, double)"),  self.method,  self.spinBoxDistance.value())
+        self.okClicked.emit(self.method,self.spinBoxDistance.value())
         pass
 
 
     def close(self):
-        self.emit(SIGNAL("unsetTool()")) 
+        self.unsetTool.emit()
         pass
