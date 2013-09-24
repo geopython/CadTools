@@ -32,9 +32,9 @@ class RectangularPointsTool():
             self.act_selectlinesegment.setCheckable(True)            
             
             # Connect to signals for button behaviour
-            QObject.connect(self.act_rectpoints,  SIGNAL("triggered()"),  self.showDialog) 
-            QObject.connect(self.act_selectlinesegment,  SIGNAL("triggered()"),  self.selectlinesegment)   
-            QObject.connect(self.canvas, SIGNAL("mapToolSet(QgsMapTool*)"), self.deactivate)
+            self.act_rectpoints.triggered.connect(self.showDialog)
+            self.act_selectlinesegment.triggered.connect(self.selectlinesegment)
+            self.canvas.mapToolSet.connect(self.deactivate)
             
             # Add actions to the toolbar
             toolBar.addSeparator()
@@ -53,9 +53,9 @@ class RectangularPointsTool():
                 self.ctrl.initGui()
                 self.ctrl.show()
                 # connect the signals
-                QObject.connect(self.ctrl, SIGNAL("coordSegments(double, double, bool)"), self.calculateRectangularPoint)
-                QObject.connect(self.ctrl, SIGNAL("closeRectangularPointsGui()"), self.deactivate)            
-                QObject.connect(self.ctrl, SIGNAL("unsetTool()"), self.unsetTool)
+                self.ctrl.coordSegments.connect(self.calculateRectangularPoint)
+                self.ctrl.closeRectangularPointsGui.connect(self.deactivate)
+                self.ctrl.unsetTool.connect(self.unsetTool)
                          
         def calculateRectangularPoint(self, dX, dY,  inverse):
             # I still don't get it.....
@@ -91,7 +91,7 @@ class RectangularPointsTool():
             self.act_selectlinesegment.setChecked(True)        
                     
             #Connect to the SegmentFinderTool
-            QObject.connect(self.tool, SIGNAL("segmentFound(PyQt_PyObject)"), self.storeSegmentPoints)
+            self.tool.segmentFound.connect(self.storeSegmentPoints)
             
         def storeSegmentPoints(self,  result):
             if result[0].x() < result[1].x():
@@ -115,4 +115,7 @@ class RectangularPointsTool():
                     
             #uncheck the button/menu and get rid off the SSFtool signal
             self.act_selectlinesegment.setChecked(False)
-            QObject.disconnect(self.tool, SIGNAL("segmentFound(PyQt_PyObject)"), self.storeSegmentPoints)                  
+            try:
+                self.tool.segmentFound.disconnect(self.storeSegmentPoints)
+            except TypeError:
+                pass

@@ -7,6 +7,8 @@ import math
 from ui_showazimuth import Ui_ShowAzimuth
 
 class ShowAzimuthGui(QDialog, QObject, Ui_ShowAzimuth):
+
+    unsetTool = pyqtSignal()
     
     def __init__(self, parent, flags):
         QDialog.__init__(self, parent,  flags)
@@ -29,7 +31,7 @@ class ShowAzimuthGui(QDialog, QObject, Ui_ShowAzimuth):
         
     @pyqtSignature("on_buttonClose_clicked()")    
     def on_buttonClose_clicked(self):
-        self.emit(SIGNAL("unsetTool()"))         
+        self.unsetTool.emit()
         self.close()
         
 

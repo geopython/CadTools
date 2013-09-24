@@ -8,7 +8,11 @@ from ui_orthogonaltraverse import Ui_OrthogonalTraverse
 
 class OrthogonalTraverseGui(QDialog, QObject, Ui_OrthogonalTraverse):
     MSG_BOX_TITLE = "Orthogonal Traverse"
-    
+
+    sendTraverse = pyqtSignal(str, float, float, float, float, bool, bool)
+    closeOrthogonalTraverseGui = pyqtSignal()
+    unsetTool = pyqtSignal()
+
     def __init__(self, parent):
         QDialog.__init__(self, parent)
         self.setupUi(self)
@@ -43,11 +47,11 @@ class OrthogonalTraverseGui(QDialog, QObject, Ui_OrthogonalTraverse):
             self.lineEditEndY.setText(str(p2.y()))
             
         # Connect to signal to remember user that some data has changed
-        self.connect(self.lineEditTraverse, SIGNAL("textChanged(const QString &)"), self.textHasChanged) 
-        self.connect(self.lineEditStartX, SIGNAL("textChanged(const QString &)"), self.textHasChanged) 
-        self.connect(self.lineEditStartY, SIGNAL("textChanged(const QString &)"), self.textHasChanged) 
-        self.connect(self.lineEditEndX, SIGNAL("textChanged(const QString &)"), self.textHasChanged) 
-        self.connect(self.lineEditEndY, SIGNAL("textChanged(const QString &)"), self.textHasChanged) 
+        self.lineEditTraverse.textChanged.connect(self.textHasChanged)
+        self.lineEditStartX.textChanged.connect(self.textHasChanged)
+        self.lineEditStartY.textChanged.connect(self.textHasChanged)
+        self.lineEditEndX.textChanged.connect(self.textHasChanged)
+        self.lineEditEndY.textChanged.connect(self.textHasChanged)
             
         pass
         
@@ -115,7 +119,7 @@ class OrthogonalTraverseGui(QDialog, QObject, Ui_OrthogonalTraverse):
     def on_btnEql_clicked(self):
         isValid = self.checkInputData()
         if isValid == 1:
-            self.emit(SIGNAL("sendTraverse(QString, double, double, double, double, bool, bool)"), str(self.lineEditTraverse.text()),  float(self.lineEditStartX.text()),  float(self.lineEditStartY.text()),  float(self.lineEditEndX.text()),  float(self.lineEditEndY.text()), True, False) 
+            self.sendTraverse.emit(str(self.lineEditTraverse.text()),  float(self.lineEditStartX.text()),  float(self.lineEditStartY.text()),  float(self.lineEditEndX.text()),  float(self.lineEditEndY.text()), True, False)
             self.adjusted = True
             print "emitiert...EqlBtn"
         else:
@@ -127,13 +131,13 @@ class OrthogonalTraverseGui(QDialog, QObject, Ui_OrthogonalTraverse):
         isValid = self.checkInputData()
         if isValid == 1:
             if self.adjusted == True:
-                self.emit(SIGNAL("sendTraverse(QString, double, double, double, double, bool, bool)"), str(self.lineEditTraverse.text()),  float(self.lineEditStartX.text()),  float(self.lineEditStartY.text()),  float(self.lineEditEndX.text()),  float(self.lineEditEndY.text()), True, True) 
+                self.sendTraverse.emit(str(self.lineEditTraverse.text()),  float(self.lineEditStartX.text()),  float(self.lineEditStartY.text()),  float(self.lineEditEndX.text()),  float(self.lineEditEndY.text()), True, True)
             else:
                 reply = QMessageBox.question(self, 'Message',  "Traverse is not adjusted. Do you want to adjust it first?", QMessageBox.Yes, QMessageBox.No)
                 if reply == QMessageBox.Yes:
-                    self.emit(SIGNAL("sendTraverse(QString, double, double, double, double, bool, bool)"), str(self.lineEditTraverse.text()),  float(self.lineEditStartX.text()),  float(self.lineEditStartY.text()),  float(self.lineEditEndX.text()),  float(self.lineEditEndY.text()), True, True) 
+                    self.sendTraverse.emit(str(self.lineEditTraverse.text()),  float(self.lineEditStartX.text()),  float(self.lineEditStartY.text()),  float(self.lineEditEndX.text()),  float(self.lineEditEndY.text()), True, True)
                 else:
-                    self.emit(SIGNAL("sendTraverse(QString, double, double, double, double, bool, bool)"), str(self.lineEditTraverse.text()),  float(self.lineEditStartX.text()),  float(self.lineEditStartY.text()),  float(self.lineEditEndX.text()),  float(self.lineEditEndY.text()), False, True) 
+                    self.sendTraverse.emit(str(self.lineEditTraverse.text()),  float(self.lineEditStartX.text()),  float(self.lineEditStartY.text()),  float(self.lineEditEndX.text()),  float(self.lineEditEndY.text()), False, True)
             print "emitiert...OkBtn"
         else:
             return
@@ -142,6 +146,6 @@ class OrthogonalTraverseGui(QDialog, QObject, Ui_OrthogonalTraverse):
         
     @pyqtSignature("on_btnCancel_clicked()")    
     def on_btnCancel_clicked(self): 
-        self.emit(SIGNAL("closeOrthogonalTraverseGui()"))  
-        self.emit(SIGNAL("unsetTool()")) 
+        self.closeOrthogonalTraverseGui.emit()
+        self.unsetTool.emit()
         self.close()

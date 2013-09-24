@@ -74,12 +74,12 @@ class CadTools:
         lastAction = actions[ len( actions ) - 1 ]
         menu_bar.insertMenu( lastAction, self.menu )
 
-        QObject.connect( self.cadtools_about, SIGNAL("triggered()"), self.doAbout )   
-        QObject.connect( self.cadtools_help, SIGNAL("triggered()"), self.doHelp )    
-        QObject.connect( self.cadtools_settings, SIGNAL("triggered()"), self.doSettings )    
+        self.cadtools_about.triggered.connect(self.doAbout)
+        self.cadtools_help.triggered.connect(self.doHelp)
+        self.cadtools_settings.triggered.connect(self.doSettings)
 
         # this is just a test......... 
-##        QObject.connect( self.cadtools_dock, SIGNAL("triggered()"), self.doTheDock )    
+##        self.cadtools_dock.triggered.connect(self.doTheDock)
         
         # Get the tools
         self.lineintersector = LineIntersectionTool(self.iface,  self.toolBar)

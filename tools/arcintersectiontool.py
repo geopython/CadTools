@@ -34,9 +34,9 @@ class ArcIntersectionTool:
             self.act_s2v.setCheckable(True)      
       
             # Connect to signals for button behaviour      
-            QObject.connect(self.act_intersect_arc,  SIGNAL("triggered()"),  self.showDialog)
-            QObject.connect(self.act_s2v,  SIGNAL("triggered()"),  self.s2v)
-            QObject.connect(self.canvas, SIGNAL("mapToolSet(QgsMapTool*)"), self.deactivate)
+            self.act_intersect_arc.triggered.connect(self.showDialog)
+            self.act_s2v.triggered.connect(self.s2v)
+            self.canvas.mapToolSet.connect(self.deactivate)
 
             toolBar.addSeparator()
             toolBar.addAction(self.act_s2v)
@@ -54,7 +54,7 @@ class ArcIntersectionTool:
             self.act_s2v.setChecked(True)                    
             
             #Connect to the VertexFinderTool
-            QObject.connect(self.tool, SIGNAL("vertexFound(PyQt_PyObject)"), self.storeVertexPointsAndMarkers)
+            self.tool.vertexFound.connect(self.storeVertexPointsAndMarkers)
 
         def storeVertexPointsAndMarkers(self,  result):
             self.p1 = result[0]
@@ -71,9 +71,9 @@ class ArcIntersectionTool:
                 self.ctrl.initGui()
                 self.ctrl.show()
                 # connect the signals
-                QObject.connect(self.ctrl, SIGNAL("distancesFromPoints(double, double)"), self.calculateArcIntersection)
-                QObject.connect(self.ctrl, SIGNAL("closeArcIntersectionGui()"), self.deactivate)
-                QObject.connect(self.ctrl, SIGNAL("unsetTool()"), self.unsetTool)
+                self.ctrl.distancesFromPoints.connect(self.calculateArcIntersection)
+                self.ctrl.closeArcIntersectionGui.connect(self.deactivate)
+                self.ctrl.unsetTool.connect(self.unsetTool)
             
             
         def calculateArcIntersection(self,  dist1,  dist2):

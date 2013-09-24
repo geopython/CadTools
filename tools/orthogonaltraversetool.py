@@ -33,9 +33,9 @@ class OrthogonalTraverseTool:
             self.act_select2vertex.setCheckable(True)      
       
             # Connect to signals for button behaviour      
-            QObject.connect(self.act_showDialog,  SIGNAL("triggered()"),  self.showDialog)
-            QObject.connect(self.act_select2vertex,  SIGNAL("triggered()"),  self.select2vertex)
-            QObject.connect(self.canvas, SIGNAL("mapToolSet(QgsMapTool*)"), self.deactivate)
+            self.act_showDialog.triggered.connect(self.showDialog)
+            self.act_select2vertex.triggered.connect(self.select2vertex)
+            self.canvas.mapToolSet.connect(self.deactivate)
 
             toolBar.addSeparator()
             toolBar.addAction(self.act_select2vertex)            
@@ -53,7 +53,7 @@ class OrthogonalTraverseTool:
             mc.setMapTool(self.tool)
             self.act_select2vertex.setChecked(True)       
             
-            QObject.connect(self.tool, SIGNAL("vertexFound(PyQt_PyObject)"), self.storeVertexPointsAndMarkers)     
+            self.tool.vertexFound.connect(self.storeVertexPointsAndMarkers)
             
         def storeVertexPointsAndMarkers(self,  result):
             self.p1 = result[0]
@@ -70,9 +70,9 @@ class OrthogonalTraverseTool:
                 self.ctrl.show()
                 
                 # Connect the signals
-                QObject.connect(self.ctrl, SIGNAL("sendTraverse(QString, double, double, double, double, bool, bool)"), self.calculateTraverse)
-                QObject.connect(self.ctrl, SIGNAL("closeOrthogonalTraverseGui()"), self.deactivate)            
-                QObject.connect(self.ctrl, SIGNAL("unsetTool()"), self.unsetTool)
+                self.ctrl.sendTraverse.connect(self.calculateTraverse)
+                self.ctrl.closeOrthogonalTraverseGui.connect(self.deactivate)
+                self.ctrl.unsetTool.connect(self.unsetTool)
                 
         def calculateTraverse(self, traverse, x1, y1, x2, y2, adjust, addLine):
             
@@ -135,6 +135,9 @@ class OrthogonalTraverseTool:
             self.p2 = None
             #uncheck the button/menu and get rid off the SFtool signal
             self.act_select2vertex.setChecked(False)
-            QObject.disconnect(self.tool, SIGNAL("vertexFound(PyQt_PyObject)"), self.storeVertexPointsAndMarkers)      
+            try:
+                self.tool.vertexFound.disconnect(self.storeVertexPointsAndMarkers)
+            except TypeError:
+                pass
             
 

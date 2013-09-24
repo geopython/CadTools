@@ -25,9 +25,9 @@ class CircularArcDigitizerTool():
             self.action_capturecirculararc.setCheckable(True)            
             
             # Connect to signals for button behaviour
-            QObject.connect(self.action_capturecirculararc,  SIGNAL("triggered()"),  self.orthodigitize)
-            QObject.connect(self.iface, SIGNAL("currentLayerChanged(QgsMapLayer*)"), self.toggle)
-            QObject.connect(mc, SIGNAL("mapToolSet(QgsMapTool*)"), self.deactivate)         
+            self.action_capturecirculararc.triggered.connect(self.orthodigitize)
+            self.iface.currentLayerChanged.connect(self.toggle)
+            mc.mapToolSet.connect(self.deactivate)
             
             # Add actions to the toolbar
             toolBar.addSeparator()
@@ -60,14 +60,23 @@ class CircularArcDigitizerTool():
                     if gtype <> 0:
                         if layer.isEditable():
                             self.action_capturecirculararc.setEnabled(True)
-                            QObject.connect(layer,SIGNAL("editingStopped()"),self.toggle)
-                            QObject.disconnect(layer,SIGNAL("editingStarted()"),self.toggle)
+                            layer.editingStopped.connect(self.toggle)
+                            try:
+                                layer.editingStarted.disconnect(self.toggle)
+                            except TypeError:
+                                pass
                         else:
                             self.action_capturecirculararc.setEnabled(False)
-                            QObject.connect(layer,SIGNAL("editingStarted()"),self.toggle)
-                            QObject.disconnect(layer,SIGNAL("editingStopped()"),self.toggle)                   
+                            layer.editingStarted.connect(self.toggle)
+                            try:
+                                layer.editingStopped.disconnect(self.toggle)
+                            except TypeError:
+                                pass
                 
                 
         def deactivate(self):
             self.action_capturecirculararc.setChecked(False)
-            #QObject.disconnect(self.tool, SIGNAL("segmentsFound(PyQt_PyObject)"), self.storeSegmentPoints)                  
+            # try:
+            #     self.tool.segmentsFound.disconnect(self.storeSegmentPoints)
+            # except TypeError:
+            #     pass

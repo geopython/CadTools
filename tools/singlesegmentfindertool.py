@@ -8,10 +8,13 @@ from qgis.gui import *
 
 
 class SingleSegmentFinderTool(QgsMapTool):
+
+  segmentFound = pyqtSignal(object)
+
   def __init__(self, canvas):
     QgsMapTool.__init__(self,canvas)
     self.canvas=canvas
-    self.rb1 = QgsRubberBand(self.canvas,  False)
+    self.rb1 = QgsRubberBand(self.canvas)
     #our own fancy cursor
     self.cursor = QCursor(QPixmap(["16 16 3 1",
                                   "      c None",
@@ -76,9 +79,9 @@ class SingleSegmentFinderTool(QgsMapTool):
         self.rb1.show()
         
         if QGis.QGIS_VERSION_INT >= 10700:        
-            self.emit(SIGNAL("segmentFound(PyQt_PyObject)"), [self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 1),  self.rb1])
+            self.segmentFound.emit([self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 1),  self.rb1])
         else:
-            self.emit(SIGNAL("segmentFound(PyQt_PyObject)"), [self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 2),  self.rb1])
+            self.segmentFound.emit([self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 2),  self.rb1])
             
          
       else:

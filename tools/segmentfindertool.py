@@ -8,11 +8,14 @@ from qgis.gui import *
 
 # Vertex Finder Tool class
 class SegmentFinderTool(QgsMapTool):
+
+  segmentsFound = pyqtSignal(object)
+
   def __init__(self, canvas):
     QgsMapTool.__init__(self,canvas)
     self.canvas=canvas
-    self.rb1 = QgsRubberBand(self.canvas,  False)
-    self.rb2 = QgsRubberBand(self.canvas,  False)
+    self.rb1 = QgsRubberBand(self.canvas)
+    self.rb2 = QgsRubberBand(self.canvas)
     self.count = 0
     #our own fancy cursor
     self.cursor = QCursor(QPixmap(["16 16 3 1",
@@ -107,9 +110,9 @@ class SegmentFinderTool(QgsMapTool):
         #tell the world about the segments  
         if self.count == 2:
             if QGis.QGIS_VERSION_INT >= 10700:
-                self.emit(SIGNAL("segmentsFound(PyQt_PyObject)"), [self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 1),  self.rb2.getPoint(0, 0),  self.rb2.getPoint(0, 1)])
+                self.segmentsFound.emit([self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 1),  self.rb2.getPoint(0, 0),  self.rb2.getPoint(0, 1)])
             else:
-                self.emit(SIGNAL("segmentsFound(PyQt_PyObject)"), [self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 2),  self.rb2.getPoint(0, 0),  self.rb2.getPoint(0, 2)])
+                self.segmentsFound.emit([self.rb1.getPoint(0, 0),  self.rb1.getPoint(0, 2),  self.rb2.getPoint(0, 0),  self.rb2.getPoint(0, 2)])
          
       else:
         #warn about missing snapping tolerance if appropriate

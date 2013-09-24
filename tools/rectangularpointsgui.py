@@ -7,6 +7,10 @@ from ui_rectangularpoints import Ui_RectangularPoints
 
 class RectangularPointsGui(QDialog, QObject, Ui_RectangularPoints):
     MSG_BOX_TITLE = "Arc Intersection"
+
+    coordSegments = pyqtSignal(float,float,bool)
+    closeRectangularPointsGui = pyqtSignal()
+    unsetTool = pyqtSignal()
     
     def __init__(self, parent,  fl):
         QDialog.__init__(self, parent,  fl)
@@ -23,11 +27,11 @@ class RectangularPointsGui(QDialog, QObject, Ui_RectangularPoints):
         
     @pyqtSignature("on_btnAdd_clicked()")    
     def on_btnAdd_clicked(self):
-        self.emit(SIGNAL("coordSegments(double, double, bool)"),  self.sboxA.value(),  self.sboxO.value(),  self.chckBoxInvert.isChecked())        
+        self.coordSegments.emit(self.sboxA.value(),  self.sboxO.value(),  self.chckBoxInvert.isChecked())
         #self.close()
         
     @pyqtSignature("on_btnCancel_clicked()")    
     def on_btnCancel_clicked(self): 
-        self.emit(SIGNAL("closeRectangularPointsGui()"))   
-        self.emit(SIGNAL("unsetTool()"))   
+        self.closeRectangularPointsGui.emit()
+        self.unsetTool.emit()
         self.close()

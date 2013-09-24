@@ -6,16 +6,19 @@ from ui_rotateobject import Ui_RotateObject
 import os, sys
 
 class RotateObjectGui(QDialog, Ui_RotateObject):
+
+    okClicked = pyqtSignal(float)
+    unsetTool = pyqtSignal()
   
     def __init__(self, parent, flags):
         QDialog.__init__(self, parent, flags)
         self.setupUi(self)
         
         self.okButton = self.buttonBox.button(QDialogButtonBox.Ok)
-        self.connect(self.okButton, SIGNAL("accepted()"), self.accept)
+        self.okButton.clicked.connect(self.accept)
         
         self.cancelButton = self.buttonBox.button(QDialogButtonBox.Cancel)
-        self.connect(self.cancelButton, SIGNAL("clicked()"), self.close)        
+        self.cancelButton.clicked.connect(self.close)
         
 
     def initGui(self):
@@ -26,8 +29,8 @@ class RotateObjectGui(QDialog, Ui_RotateObject):
 
         
     def accept(self):
-        self.emit( SIGNAL("okClicked(double)"),  self.rotationSpinBox.value())
+        self.okClicked.emit(self.rotationSpinBox.value())
         
     
     def close(self):
-        self.emit(SIGNAL("unsetTool()")) 
+        self.unsetTool.emit()

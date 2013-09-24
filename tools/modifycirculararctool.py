@@ -29,9 +29,9 @@ class ModifyCircularArcTool:
             self.action_modifycirculararc.setEnabled(False) 
       
             # Connect to signals for button behaviour      
-            QObject.connect(self.action_modifycirculararc,  SIGNAL("triggered()"),  self.modifycirculararc)
-            QObject.connect(self.iface, SIGNAL("currentLayerChanged(QgsMapLayer*)"), self.toggle)
-            QObject.connect(self.canvas, SIGNAL("mapToolSet(QgsMapTool*)"), self.deactivate)
+            self.action_modifycirculararc.triggered.connect(self.modifycirculararc)
+            self.iface.currentLayerChanged.connect(self.toggle)
+            self.canvas.mapToolSet.connect(self.deactivate)
 
             toolBar.addSeparator()
             toolBar.addAction(self.action_modifycirculararc)
@@ -75,12 +75,18 @@ class ModifyCircularArcTool:
                     if gtype == 1:
                         if layer.isEditable():
                             self.action_modifycirculararc.setEnabled(True) 
-                            QObject.connect(layer,SIGNAL("editingStopped()"),self.toggle)
-                            QObject.disconnect(layer,SIGNAL("editingStarted()"),self.toggle)
+                            layer.editingStopped.connect(self.toggle)
+                            try:
+                                layer.editingStarted.disconnect(self.toggle)
+                            except TypeError:
+                                pass
                         else:
                             self.action_modifycirculararc.setEnabled(False) 
-                            QObject.connect(layer,SIGNAL("editingStarted()"),self.toggle)
-                            QObject.disconnect(layer,SIGNAL("editingStopped()"),self.toggle)        
+                            layer.editingStarted.connect(self.toggle)
+                            try:
+                                layer.editingStopped.disconnect(self.toggle)
+                            except TypeError:
+                                pass
 
 
         def unsetTool(self):

@@ -29,10 +29,10 @@ class OrthogonalDigitizerTool():
             self.act_ortho.setCheckable(True)            
             
             # Connect to signals for button behaviour
-            QObject.connect(self.act_ortho,  SIGNAL("triggered()"),  self.orthodigitize)
-            QObject.connect(self.iface, SIGNAL("currentLayerChanged(QgsMapLayer*)"), self.toggle)
-            QObject.connect(mc, SIGNAL("mapToolSet(QgsMapTool*)"), self.deactivate)         
-            QObject.connect( self.act_console, SIGNAL("triggered()"), self.showCadConsole )    
+            self.act_ortho.triggered.connect(self.orthodigitize)
+            self.iface.currentLayerChanged.connect(self.toggle)
+            mc.mapToolSet.connect(self.deactivate)
+            self.act_console.triggered.connect(self.showCadConsole)
             
             # Add actions to the toolbar
             toolBar.addSeparator()
@@ -79,15 +79,24 @@ class OrthogonalDigitizerTool():
                     if gtype <> 0:
                         if layer.isEditable():
                             self.act_ortho.setEnabled(True)
-                            QObject.connect(layer,SIGNAL("editingStopped()"),self.toggle)
-                            QObject.disconnect(layer,SIGNAL("editingStarted()"),self.toggle)
+                            layer.editingStopped.connect(self.toggle)
+                            try:
+                                layer.editingStarted.disconnect(self.toggle)
+                            except TypeError:
+                                pass
                         else:
                             self.act_ortho.setEnabled(False)
-                            QObject.connect(layer,SIGNAL("editingStarted()"),self.toggle)
-                            QObject.disconnect(layer,SIGNAL("editingStopped()"),self.toggle)                   
+                            layer.editingStarted.connect(self.toggle)
+                            try:
+                                layer.editingStopped.disconnect(self.toggle)
+                            except TypeError:
+                                pass
 
 
         def deactivate(self):
             #uncheck the button/menu and get rid off the SFtool signal
             self.act_ortho.setChecked(False)
-            #QObject.disconnect(self.tool, SIGNAL("segmentsFound(PyQt_PyObject)"), self.storeSegmentPoints)                  
+            # try:
+            #     self.tool.segmentsFound.disconnect(self.storeSegmentPoints)
+            # except TypeError:
+            #     pass

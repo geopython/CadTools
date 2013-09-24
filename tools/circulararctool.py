@@ -28,9 +28,9 @@ class CircularArcTool:
             self.action_selectthreepoints.setCheckable(True)      
       
             # Connect to signals for button behaviour      
-            QObject.connect(self.action_selectthreepoints,  SIGNAL("triggered()"),  self.selectThreePoints)
-            QObject.connect(self.action_circulararc,   SIGNAL("triggered()"),  self.createCircularArc)
-            QObject.connect(self.canvas, SIGNAL("mapToolSet(QgsMapTool*)"), self.deactivate)
+            self.action_selectthreepoints.triggered.connect(self.selectThreePoints)
+            self.action_circulararc.triggered.connect(self.createCircularArc)
+            self.canvas.mapToolSet.connect(self.deactivate)
 
             toolBar.addSeparator()
             toolBar.addAction(self.action_selectthreepoints)
@@ -47,7 +47,7 @@ class CircularArcTool:
             self.action_selectthreepoints.setChecked(True)                    
             
             #Connect to the FinderTool
-            QObject.connect(self.tool, SIGNAL("arcPointsFound(PyQt_PyObject)"), self.storeArcPoints)
+            self.tool.arcPointsFound.connect(self.storeArcPoints)
 
 
         def storeArcPoints(self,  result):
@@ -60,14 +60,14 @@ class CircularArcTool:
             settings = QSettings("CatAIS","cadtools")
             method = settings.value("arcs/featuremethod",  "pitch")
             if method == "pitch":
-                value = settings.value("arcs/featurepitch",  2)
+                value = settings.value("arcs/featurepitch",  2, type=float)
             else:
-                value = settings.value("arcs/featureangle",  1)
+                value = settings.value("arcs/featureangle",  1, type=float)
 
             if self.p1 == None or self.p2 == None or self.p3 == None:
                 QMessageBox.information(None, QCoreApplication.translate("ctools", "Cancel"), QCoreApplication.translate("ctools", "Not enough points selected."))
             else:
-                g = CircularArc.getInterpolatedArc(self.p1,  self.p2,  self.p3,  method.toString(),  value.toDouble()[0])
+                g = CircularArc.getInterpolatedArc(self.p1,  self.p2,  self.p3,  method,  value)
                 cadutils.addGeometryToCadLayer(g)     
                 self.canvas.refresh()
                 

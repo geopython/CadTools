@@ -12,15 +12,15 @@ def version():
 
 def qgisMinimumVersion():
     return "2.0"
-	
+
 def qgisMaximumVersion():
     return "2.99"
 
 def authorName():
     return "Stefan Ziegler"
-    
+
 def icon():
-	return "icons/orthopoint.png"        
+	return "icons/orthopoint.png"
 
 def classFactory(iface):
     return CadTools(iface)

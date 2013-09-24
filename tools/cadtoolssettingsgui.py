@@ -7,6 +7,8 @@ import os, sys
 
 class CadToolsSettingsGui(QDialog, Ui_CadToolsSettings):
 
+    # btnSelectVertex_clicked = pyqtSignal()
+
     def __init__(self, parent):
         QDialog.__init__(self, parent)
         self.setupUi(self)
@@ -42,7 +44,10 @@ class CadToolsSettingsGui(QDialog, Ui_CadToolsSettings):
         self.tabWidget.setTabEnabled(self.tabWidget.indexOf(self.tab2),  False)                
         
         self.okButton = self.buttonBox.button(QDialogButtonBox.Ok)
-        self.connect(self.okButton, SIGNAL("accepted()"), self.accept)        
+        self.okButton.clicked.connect(self.accept)
+
+        self.cancelButton = self.buttonBox.button(QDialogButtonBox.Cancel)
+        self.cancelButton.clicked.connect(self.close)
 
         pass
 
@@ -52,18 +57,18 @@ class CadToolsSettingsGui(QDialog, Ui_CadToolsSettings):
 #    def on_btnSelectVertex_clicked(self):
 #        self.method = "vertex"
 #        self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(True)   
-#        self.emit( SIGNAL("btnSelectVertex_clicked()") )
+#        self.btnSelectVertex_clicked.emit()
 #
 #
     def accept(self):
-        self.settings.setValue("arcs/featurepitch", QVariant(self.spinBoxFeaturePitch.value()))
-        self.settings.setValue("arcs/featureangle", QVariant(self.spinBoxFeatureAngle.value()))
-        self.settings.setValue("arcs/rubberangle", QVariant(self.spinBoxRubberAngle.value()))
+        self.settings.setValue("arcs/featurepitch", self.spinBoxFeaturePitch.value())
+        self.settings.setValue("arcs/featureangle", self.spinBoxFeatureAngle.value())
+        self.settings.setValue("arcs/rubberangle", self.spinBoxRubberAngle.value())
         
         if self.radioFeaturePitch.isChecked():
-            self.settings.setValue("arcs/featuremethod", QVariant("pitch"))
+            self.settings.setValue("arcs/featuremethod", "pitch")
         else:
-            self.settings.setValue("arcs/featuremethod", QVariant("angle"))
+            self.settings.setValue("arcs/featuremethod", "angle")
 
         self.close()
         

@@ -31,9 +31,9 @@ class LineIntersectionTool():
             self.act_s2s.setCheckable(True)            
             
             # Connect to signals for button behaviour
-            QObject.connect(self.act_s2s,  SIGNAL("triggered()"),  self.s2s)
-            QObject.connect(self.act_intersection,  SIGNAL("triggered()"),  self.intersection) 
-            QObject.connect(self.canvas, SIGNAL("mapToolSet(QgsMapTool*)"), self.deactivate)
+            self.act_s2s.triggered.connect(self.s2s)
+            self.act_intersection.triggered.connect(self.intersection)
+            self.canvas.mapToolSet.connect(self.deactivate)
             
             # Add actions to the toolbar
             toolBar.addAction(self.act_s2s)
@@ -53,7 +53,7 @@ class LineIntersectionTool():
             self.act_s2s.setChecked(True)        
                     
             #Connect to the SegmentFinderTool
-            QObject.connect(self.tool, SIGNAL("segmentsFound(PyQt_PyObject)"), self.storeSegmentPoints)
+            self.tool.segmentsFound.connect(self.storeSegmentPoints)
             
         def storeSegmentPoints(self,  result):
             self.p11 = result[0]
@@ -116,4 +116,7 @@ class LineIntersectionTool():
             
             #uncheck the button/menu and get rid off the SFtool signal
             self.act_s2s.setChecked(False)
-            QObject.disconnect(self.tool, SIGNAL("segmentsFound(PyQt_PyObject)"), self.storeSegmentPoints)                  
+            try:
+                self.tool.segmentsFound.disconnect(self.storeSegmentPoints)
+            except TypeError:
+                pass

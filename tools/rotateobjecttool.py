@@ -25,9 +25,9 @@ class RotateObjectTool:
         self.act_selectvertexandobject= QAction(QIcon(":/plugins/cadtools/icons/selectvertexandfeature.png"), QCoreApplication.translate("ctools", "Select Vertex and Object"),  self.iface.mainWindow())
         self.act_selectvertexandobject.setCheckable(True)     
              
-        QObject.connect(self.act_rotateobject,  SIGNAL("triggered()"),  self.showDialog)
-        QObject.connect(self.act_selectvertexandobject,  SIGNAL("triggered()"),  self.selectvertexandobject)
-        QObject.connect(self.canvas, SIGNAL("mapToolSet(QgsMapTool*)"), self.deactivate)
+        self.act_rotateobject.triggered.connect(self.showDialog)
+        self.act_selectvertexandobject.triggered.connect(self.selectvertexandobject)
+        self.canvas.mapToolSet.connect(self.deactivate)
 
         toolBar.addSeparator()
         toolBar.addAction(self.act_selectvertexandobject)
@@ -37,12 +37,12 @@ class RotateObjectTool:
 
 
     def selectvertexandobject(self):
-        mc = self.canvas            
+        mc = self.canvas
         mc.setMapTool(self.tool)
         
         self.act_selectvertexandobject.setChecked(True)       
  
-        QObject.connect(self.tool, SIGNAL("vertexAndObjectFound(PyQt_PyObject)"), self.storeVertexAndObject)
+        self.tool.vertexAndObjectFound.connect(self.storeVertexAndObject)
  
         pass
         
@@ -54,7 +54,7 @@ class RotateObjectTool:
     
     
     def showDialog(self):
-        
+
         if self.p1 == None or self.feat == None:
             QMessageBox.information(None, QCoreApplication.translate("ctools", "Cancel"), QCoreApplication.translate("ctools", "Not enough objects selected."))
         else:
@@ -65,13 +65,13 @@ class RotateObjectTool:
             self.ctrl.initGui()
             self.ctrl.show()
 
-            QObject.connect(self.ctrl, SIGNAL("okClicked(double)"), self.rotateObject)
-            QObject.connect(self.ctrl, SIGNAL("unsetTool()"), self.unsetTool)              
+            self.ctrl.okClicked.connect(self.rotateObject)
+            self.ctrl.unsetTool.connect(self.unsetTool)
         
         pass
 
 
-    def rotateObject(self,  angle):        
+    def rotateObject(self,  angle):
         geom = cadutils.rotate(self.feat.geometry(), self.p1,  angle * math.pi / 180)
         if geom <> None:
             cadutils.addGeometryToCadLayer(geom)

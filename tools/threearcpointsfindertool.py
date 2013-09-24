@@ -11,6 +11,9 @@ from qgis.gui import *
 ## - but should be perhaps use the same?!?!?
 
 class ThreeArcPointsFinderTool(QgsMapTool):
+
+  arcPointsFound = pyqtSignal(object)
+
   def __init__(self, canvas):
     QgsMapTool.__init__(self,canvas)
     self.canvas = canvas
@@ -115,7 +118,7 @@ class ThreeArcPointsFinderTool(QgsMapTool):
 
             self.count = self.count + 1            
             
-            self.emit(SIGNAL("arcPointsFound(PyQt_PyObject)"), [self.p1, self.p2,  self.p3])
+            self.arcPointsFound.emit([self.p1, self.p2,  self.p3])
 
         elif self.count % 3 == 0:
             
@@ -131,7 +134,7 @@ class ThreeArcPointsFinderTool(QgsMapTool):
             if self.count > 300:
                 self.count = 4
 
-            self.emit(SIGNAL("arcPointsFound(PyQt_PyObject)"), [self.p1, self.p2,  self.p3])
+            self.arcPointsFound.emit([self.p1, self.p2,  self.p3])
 
 
         elif self.count > 3 and self.count % 3 != 0:
@@ -146,7 +149,7 @@ class ThreeArcPointsFinderTool(QgsMapTool):
             
             self.count = self.count + 1              
             
-            self.emit(SIGNAL("arcPointsFound(PyQt_PyObject)"), [self.p1, self.p2,  self.p3])
+            self.arcPointsFound.emit([self.p1, self.p2,  self.p3])
 
     else:
         #warn about missing snapping tolerance if appropriate

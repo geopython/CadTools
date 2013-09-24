@@ -22,9 +22,9 @@ class HorizontalVerticalDigitizerTool():
             self.act_horivert.setEnabled(False)
             self.act_horivert.setCheckable(True)            
             
-            QObject.connect(self.act_horivert,  SIGNAL("triggered()"),  self.hvdigitize)
-            QObject.connect(self.iface, SIGNAL("currentLayerChanged(QgsMapLayer*)"), self.toggle)
-            QObject.connect(mc, SIGNAL("mapToolSet(QgsMapTool*)"), self.deactivate)         
+            self.act_horivert.triggered.connect(self.hvdigitize)
+            self.iface.currentLayerChanged.connect(self.toggle)
+            mc.mapToolSet.connect(self.deactivate)
             
             toolBar.addSeparator()
             toolBar.addAction(self.act_horivert)
@@ -54,14 +54,23 @@ class HorizontalVerticalDigitizerTool():
                     if gtype <> 0:
                         if layer.isEditable():
                             self.act_horivert.setEnabled(True)
-                            QObject.connect(layer,SIGNAL("editingStopped()"),self.toggle)
-                            QObject.disconnect(layer,SIGNAL("editingStarted()"),self.toggle)
+                            layer.editingStopped.connect(self.toggle)
+                            try:
+                                layer.editingStarted.disconnect(self.toggle)
+                            except TypeError:
+                                pass
                         else:
                             self.act_horivert.setEnabled(False)
-                            QObject.connect(layer,SIGNAL("editingStarted()"),self.toggle)
-                            QObject.disconnect(layer,SIGNAL("editingStopped()"),self.toggle)                   
+                            layer.editingStarted.connect(self.toggle)
+                            try:
+                                layer.editingStopped.disconnect(self.toggle)
+                            except TypeError:
+                                pass
 
 
         def deactivate(self):
             self.act_horivert.setChecked(False)
-            #QObject.disconnect(self.tool, SIGNAL("segmentsFound(PyQt_PyObject)"), self.storeSegmentPoints)                  
+            # try:
+            #     self.tool.segmentsFound.disconnect(self.storeSegmentPoints)
+            # except TypeError:
+            #     pass
