@@ -29,6 +29,7 @@ tools/parallellinetool.py \
 tools/circulararctool.py \
 tools/modifycirculararctool.py \
 tools/circulararcdigitizertool.py \
+tools/splinetool.py \
 tools/horizontalverticaldigitizertool.py \
 tools/orthogonaldigitizertool.py
 
