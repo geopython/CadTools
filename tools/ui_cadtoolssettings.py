@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file './tools/cadtoolssettings.ui'
+# Form implementation generated from reading ui file 'tools/cadtoolssettings.ui'
 #
-# Created: Wed Sep 18 17:02:25 2013
-#      by: PyQt4 UI code generator 4.10
+# Created: Tue Feb  4 18:18:51 2014
+#      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,16 +12,7 @@ from PyQt4 import QtCore, QtGui
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+    _fromUtf8 = lambda s: s
 
 class Ui_CadToolsSettings(object):
     def setupUi(self, CadToolsSettings):
@@ -100,25 +91,55 @@ class Ui_CadToolsSettings(object):
         self.tabWidget.addTab(self.tabCurves, _fromUtf8(""))
         self.tab2 = QtGui.QWidget()
         self.tab2.setObjectName(_fromUtf8("tab2"))
+        self.verticalLayout = QtGui.QVBoxLayout(self.tab2)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.horizontalLayout_4 = QtGui.QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
+        self.labelSplineTolerance = QtGui.QLabel(self.tab2)
+        self.labelSplineTolerance.setObjectName(_fromUtf8("labelSplineTolerance"))
+        self.horizontalLayout_4.addWidget(self.labelSplineTolerance)
+        self.spinBoxSplineTolerance = QtGui.QDoubleSpinBox(self.tab2)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.spinBoxSplineTolerance.sizePolicy().hasHeightForWidth())
+        self.spinBoxSplineTolerance.setSizePolicy(sizePolicy)
+        self.spinBoxSplineTolerance.setObjectName(_fromUtf8("spinBoxSplineTolerance"))
+        self.horizontalLayout_4.addWidget(self.spinBoxSplineTolerance)
+        self.verticalLayout.addLayout(self.horizontalLayout_4)
+        self.horizontalLayout_5 = QtGui.QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(_fromUtf8("horizontalLayout_5"))
+        self.labelSplineTightness = QtGui.QLabel(self.tab2)
+        self.labelSplineTightness.setObjectName(_fromUtf8("labelSplineTightness"))
+        self.horizontalLayout_5.addWidget(self.labelSplineTightness)
+        self.spinBoxSplineTightness = QtGui.QDoubleSpinBox(self.tab2)
+        self.spinBoxSplineTightness.setObjectName(_fromUtf8("spinBoxSplineTightness"))
+        self.horizontalLayout_5.addWidget(self.spinBoxSplineTightness)
+        self.verticalLayout.addLayout(self.horizontalLayout_5)
+        spacerItem1 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.verticalLayout.addItem(spacerItem1)
         self.tabWidget.addTab(self.tab2, _fromUtf8(""))
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
 
         self.retranslateUi(CadToolsSettings)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), CadToolsSettings.reject)
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), CadToolsSettings.accept)
         QtCore.QMetaObject.connectSlotsByName(CadToolsSettings)
 
     def retranslateUi(self, CadToolsSettings):
-        CadToolsSettings.setWindowTitle(_translate("CadToolsSettings", "CadTools Settings", None))
-        self.groupBox.setTitle(_translate("CadToolsSettings", "Feature Segmentation", None))
-        self.radioFeaturePitch.setText(_translate("CadToolsSettings", "Pitch", None))
-        self.spinBoxFeaturePitch.setPrefix(_translate("CadToolsSettings", "Millimeter(s) ", None))
-        self.radioFeatureAngle.setText(_translate("CadToolsSettings", "Angle", None))
-        self.spinBoxFeatureAngle.setPrefix(_translate("CadToolsSettings", "Degree(s) ", None))
-        self.groupBox_2.setTitle(_translate("CadToolsSettings", "Rubberband Segmentation", None))
-        self.radioRubberAngle.setText(_translate("CadToolsSettings", "Angle", None))
-        self.spinBoxRubberAngle.setPrefix(_translate("CadToolsSettings", "Degree(s) ", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabCurves), _translate("CadToolsSettings", "Arcs", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), _translate("CadToolsSettings", "...", None))
+        CadToolsSettings.setWindowTitle(QtGui.QApplication.translate("CadToolsSettings", "CadTools Settings", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("CadToolsSettings", "Feature Segmentation", None, QtGui.QApplication.UnicodeUTF8))
+        self.radioFeaturePitch.setText(QtGui.QApplication.translate("CadToolsSettings", "Pitch", None, QtGui.QApplication.UnicodeUTF8))
+        self.spinBoxFeaturePitch.setPrefix(QtGui.QApplication.translate("CadToolsSettings", "Millimeter(s) ", None, QtGui.QApplication.UnicodeUTF8))
+        self.radioFeatureAngle.setText(QtGui.QApplication.translate("CadToolsSettings", "Angle", None, QtGui.QApplication.UnicodeUTF8))
+        self.spinBoxFeatureAngle.setPrefix(QtGui.QApplication.translate("CadToolsSettings", "Degree(s) ", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox_2.setTitle(QtGui.QApplication.translate("CadToolsSettings", "Rubberband Segmentation", None, QtGui.QApplication.UnicodeUTF8))
+        self.radioRubberAngle.setText(QtGui.QApplication.translate("CadToolsSettings", "Angle", None, QtGui.QApplication.UnicodeUTF8))
+        self.spinBoxRubberAngle.setPrefix(QtGui.QApplication.translate("CadToolsSettings", "Degree(s) ", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabCurves), QtGui.QApplication.translate("CadToolsSettings", "Arcs", None, QtGui.QApplication.UnicodeUTF8))
+        self.labelSplineTolerance.setText(QtGui.QApplication.translate("CadToolsSettings", "Tolerance", None, QtGui.QApplication.UnicodeUTF8))
+        self.spinBoxSplineTolerance.setToolTip(QtGui.QApplication.translate("CadToolsSettings", "Polyline interpolation tolerance in map units.", None, QtGui.QApplication.UnicodeUTF8))
+        self.labelSplineTightness.setText(QtGui.QApplication.translate("CadToolsSettings", "Tightness", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), QtGui.QApplication.translate("CadToolsSettings", "Spline", None, QtGui.QApplication.UnicodeUTF8))
 

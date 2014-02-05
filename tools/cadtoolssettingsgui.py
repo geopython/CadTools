@@ -41,7 +41,20 @@ class CadToolsSettingsGui(QDialog, Ui_CadToolsSettings):
             self.radioFeaturePitch.setChecked(False)
             self.radioFeatureAngle.setChecked(True)  
         
-        self.tabWidget.setTabEnabled(self.tabWidget.indexOf(self.tab2),  False)                
+        splineTolerance = self.settings.value("spline/tolerance", 1. )
+        splineTightness = self.settings.value("spline/tightness", 0.5 )
+        # remember degrees
+        self.spinBoxSplineTolerance.setMinimum(0.000001)
+        self.spinBoxSplineTolerance.setMaximum(10000)
+        self.spinBoxSplineTolerance.setDecimals(6)
+        self.spinBoxSplineTolerance.setSingleStep(1)
+        self.spinBoxSplineTolerance.setValue( float(splineTolerance) )
+        
+        self.spinBoxSplineTightness.setMinimum(0.01)
+        self.spinBoxSplineTightness.setMaximum(10)
+        self.spinBoxSplineTightness.setDecimals(2)
+        self.spinBoxSplineTightness.setSingleStep(0.1)
+        self.spinBoxSplineTightness.setValue( float(splineTightness) )
         
         self.okButton = self.buttonBox.button(QDialogButtonBox.Ok)
         self.okButton.clicked.connect(self.accept)
@@ -69,6 +82,9 @@ class CadToolsSettingsGui(QDialog, Ui_CadToolsSettings):
             self.settings.setValue("arcs/featuremethod", "pitch")
         else:
             self.settings.setValue("arcs/featuremethod", "angle")
+
+        self.settings.setValue("spline/tolerance", self.spinBoxSplineTolerance.value())
+        self.settings.setValue("spline/tightness", self.spinBoxSplineTightness.value())
 
         self.close()
         
