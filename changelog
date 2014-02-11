@@ -1,3 +1,7 @@
+Version 0.6.2 (2014-02-11):
+---------------------------
+* Added spline digitize tool (Thanks Radim Blazek)
+
 Version 0.6.1 (2013-09-18):
 ---------------------------
 * Further work on porting plugin to QGIS 2.0 API
