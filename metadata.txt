@@ -13,7 +13,7 @@ name=CadTools
 qgisMinimumVersion=2.0
 qgisMaximumVersion=2.99
 description=Some tools to perform cad like functions in QGIS
-version=0.6.2
+version=0.6.3
 
 # end of mandatory metadata
 
