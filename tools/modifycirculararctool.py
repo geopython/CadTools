@@ -90,7 +90,7 @@ class ModifyCircularArcTool:
 
 
         def unsetTool(self):
-            print "***************** unset tool modifycirculararctool"  
+            QgsMessageLog.logMessage("***************** unset tool modifycirculararctool", tag="CadTools", level=QgsMessageLog.INFO)
 #            self.p1 = None
 #            self.p2 = None
 #            self.p3 = None          
@@ -100,7 +100,7 @@ class ModifyCircularArcTool:
  
  
         def deactivate(self):
-            print "***************** deactivate modifycirculararctool"            
+            QgsMessageLog.logMessage("***************** deactivate modifycirculararctool", tag="CadTools", level=QgsMessageLog.INFO)
             self.action_modifycirculararc.setChecked(False)   
             
 

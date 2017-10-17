@@ -85,7 +85,7 @@ class OrthogonalTraverseTool:
             
             line = OrthogonalTraverse.traverse(traverse, 0, 1)
             if line == None:
-                print "Line is None!"
+                QgsMessageLog.logMessage("Line is None!", tag="CadTools", level=QgsMessageLog.INFO)
             else:
                 points = line.asPolyline()
                 
@@ -113,7 +113,7 @@ class OrthogonalTraverseTool:
                     rotationAngle = actualAzimuth - referenceAzimuth
                     scale = cadutils.distance(QgsPoint(x1,y1), QgsPoint(x2,y2)) / cadutils.distance(points[0], points[-1])
                     
-                    print str("scale ") + str(scale)
+                    QgsMessageLog.logMessage(str("scale ") + str(scale), tag="CadTools", level=QgsMessageLog.INFO)
                     
                     if adjust == True:
                         lineTransformed = cadutils.helmert2d(line, x1, y1, rotationAngle, scale)

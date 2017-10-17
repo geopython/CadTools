@@ -121,7 +121,7 @@ class OrthogonalTraverseGui(QDialog, QObject, Ui_OrthogonalTraverse):
         if isValid == 1:
             self.sendTraverse.emit(str(self.lineEditTraverse.text()),  float(self.lineEditStartX.text()),  float(self.lineEditStartY.text()),  float(self.lineEditEndX.text()),  float(self.lineEditEndY.text()), True, False)
             self.adjusted = True
-            print "emitiert...EqlBtn"
+            QgsMessageLog.logMessage("emitiert...EqlBtn", tag="CadTools", level=QgsMessageLog.INFO)
         else:
             return
 
@@ -138,7 +138,7 @@ class OrthogonalTraverseGui(QDialog, QObject, Ui_OrthogonalTraverse):
                     self.sendTraverse.emit(str(self.lineEditTraverse.text()),  float(self.lineEditStartX.text()),  float(self.lineEditStartY.text()),  float(self.lineEditEndX.text()),  float(self.lineEditEndY.text()), True, True)
                 else:
                     self.sendTraverse.emit(str(self.lineEditTraverse.text()),  float(self.lineEditStartX.text()),  float(self.lineEditStartY.text()),  float(self.lineEditEndX.text()),  float(self.lineEditEndY.text()), False, True)
-            print "emitiert...OkBtn"
+            QgsMessageLog.logMessage("emitiert...OkBtn", tag="CadTools", level=QgsMessageLog.INFO)
         else:
             return
         
