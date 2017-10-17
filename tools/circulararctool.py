@@ -75,7 +75,7 @@ class CircularArcTool:
         
 
         def unsetTool(self):
-            print "***************** unset tool"  
+            QgsMessageLog.logMessage("***************** unset tool", tag="CadTools", level=QgsMessageLog.INFO)
             self.p1 = None
             self.p2 = None
             self.p3 = None          
@@ -85,7 +85,7 @@ class CircularArcTool:
       
 
         def deactivate(self):
-            print "***************** deactivate circulararctool"            
+            QgsMessageLog.logMessage("***************** deactivate circulararctool", tag="CadTools", level=QgsMessageLog.INFO)
             self.action_selectthreepoints.setChecked(False)   
             
 

@@ -191,7 +191,7 @@ class CadPythonEdit(QTextEdit):
   def entered(self):
     self.cursor.movePosition(QTextCursor.End, QTextCursor.MoveAnchor)
     self.setTextCursor(self.cursor)
-    print self.currentCommand()
+    QgsMessageLog.logMessage(self.currentCommand(), tag="CadTools", level=QgsMessageLog.INFO)
     self.runCommand( unicode(self.currentCommand()) )
 
   def insertTaggedText(self, txt, tag):

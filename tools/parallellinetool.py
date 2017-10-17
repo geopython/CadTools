@@ -134,8 +134,8 @@ class ParallelLineTool:
             p2.setX(self.p2.x()) 
             p2.setY( self.p2.y())             
 
-            print str(method)
-            print str(distance)
+            QgsMessageLog.logMessage(str(method), tag="CadTools", level=QgsMessageLog.INFO)
+            QgsMessageLog.logMessage(str(distance), tag="CadTools", level=QgsMessageLog.INFO)
             
             if method == "fixed":
                 g = ParallelLine.calculateLine(self.p1,  self.p2,  distance)
@@ -143,7 +143,7 @@ class ParallelLineTool:
                 self.canvas.refresh()
 
             elif method == "vertex":
-                print "************************888"
+                QgsMessageLog.logMessage("************************888", tag="CadTools", level=QgsMessageLog.INFO)
                 points =  [self.p1,  self.p2]
                 g = QgsGeometry.fromPolyline(points)
                 g.translate( self.pv.x() - self.p1.x(),  self.pv.y() - self.p1.y() )
@@ -157,14 +157,14 @@ class ParallelLineTool:
             self.p2 = p2        
         
         def unsetTool(self):
-            print "***************** unset tool"
+            QgsMessageLog.logMessage("***************** unset tool", tag="CadTools", level=QgsMessageLog.INFO)
             mc = self.canvas
             mc.unsetMapTool(self.tool)      
             self.action_selectline.setChecked(False)       
             
             
         def deactivate(self):
-            print "***************** deactivate parallellinetool"  
+            QgsMessageLog.logMessage("***************** deactivate parallellinetool", tag="CadTools", level=QgsMessageLog.INFO)
             self.dummy = False
             self.rb1.reset()
             self.action_selectline.setChecked(False)       

@@ -94,15 +94,15 @@ class CircularArcDigitizer(QgsMapTool):
             if self.mCtrl == True:
                 if self.count == 0:
                     self.ptStart = QgsPoint( point.x(),  point.y() )
-                    print str(self.ptStart.toString())
-                    print "******************** NUmmer EINS...."
+                    QgsMessageLog.logMessage(str(self.ptStart.toString()), tag="CadTools", level=QgsMessageLog.INFO)
+                    QgsMessageLog.logMessage("******************** NUmmer EINS....", tag="CadTools", level=QgsMessageLog.INFO)
                 elif self.count == 1:
                     self.ptArc = QgsPoint( point.x(),  point.y() )
-                    print "******************** NUmmer ZWEI...."
+                    QgsMessageLog.logMessage("******************** NUmmer ZWEI....", tag="CadTools", level=QgsMessageLog.INFO)
                 elif self.count == 2:
                     
-                    print "******************** NUmmer drei...."
-                    print str(self.ptStart.toString())
+                    QgsMessageLog.logMessage("******************** NUmmer drei....", tag="CadTools", level=QgsMessageLog.INFO)
+                    QgsMessageLog.logMessage(str(self.ptStart.toString()), tag="CadTools", level=QgsMessageLog.INFO)
                     
                     self.ptEnd = QgsPoint( point.x(),  point.y() )
                     self.count = -1
