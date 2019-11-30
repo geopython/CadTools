@@ -58,20 +58,20 @@ class CircularArcDigitizerTool():
                     gtype = layer.geometryType()
                     # Doesn't make sense for points.
                     if gtype <> 0:
-                        if layer.isEditable():
-                            self.action_capturecirculararc.setEnabled(True)
-                            layer.editingStopped.connect(self.toggle)
-                            try:
-                                layer.editingStarted.disconnect(self.toggle)
-                            except TypeError:
-                                pass
-                        else:
-                            self.action_capturecirculararc.setEnabled(False)
-                            layer.editingStarted.connect(self.toggle)
-                            try:
-                                layer.editingStopped.disconnect(self.toggle)
-                            except TypeError:
-                                pass
+                        # enable if editable
+                        self.action_capturecirculararc.setEnabled(layer.isEditable())
+                        try:
+                            layer.editingStarted.disconnect(self.toggle)
+                            # disconnect, will be reconnected
+                        except TypeError:
+                            pass
+                        try:
+                            layer.editingStopped.disconnect(self.toggle)
+                            # when it becomes active layer again
+                        except TypeError:
+                            pass
+                        layer.editingStarted.connect(self.toggle)
+                        layer.editingStopped.connect(self.toggle)
                 
                 
         def deactivate(self):
